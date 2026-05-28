@@ -219,8 +219,8 @@ header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.35rem,4vw,1.9rem);
 .tip-htitle span{font-size:.75rem;font-weight:700;color:var(--text3)}
 .tip-arrow{font-size:.75rem;color:var(--text3);transition:transform .25s;flex-shrink:0}
 .tip-arrow.open{transform:rotate(90deg)}
-.tip-body{padding:0 15px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s}
-.tip-body.open{max-height:800px;padding:4px 15px 14px}
+.tip-body{padding:0 15px;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .25s}
+.tip-body.open{max-height:2400px;padding:4px 15px 14px}
 .tip-row{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border)}
 .tip-row:last-child{border-bottom:none}
 .tip-row-icon{font-size:1.15rem;flex-shrink:0;margin-top:1px}
@@ -234,6 +234,18 @@ header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.35rem,4vw,1.9rem);
 .tip-global-icon{font-size:1.2rem;flex-shrink:0}
 .tip-global-text strong{font-weight:900;font-size:.84rem;color:var(--text);display:block;margin-bottom:2px}
 .tip-global-text p{font-size:.79rem;font-weight:600;color:var(--text2);line-height:1.5}
+
+/* ── SPHERE PREVIEW ── */
+.spheres-wrap{display:flex;gap:10px;align-items:center;justify-content:center;padding:14px 0 8px;flex-wrap:wrap}
+.sphere-item{display:flex;flex-direction:column;align-items:center;gap:5px}
+.sphere-label{font-size:.65rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;text-align:center}
+.sphere-canvas{border-radius:50%;box-shadow:0 8px 24px rgba(0,0,0,.22);display:block}
+.sphere-blend-arrow{font-size:1.2rem;color:var(--text3);display:flex;align-items:center;padding-bottom:20px}
+
+/* ── QUICK TIPS (pills pequeñas) ── */
+.quick-tips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.quick-tip{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:20px;background:var(--card2);border:1px solid var(--border);font-size:.73rem;font-weight:700;color:var(--text2)}
+.quick-tip span{font-size:.9rem}
 /* ── SHARE MODAL ── */
 .sh-title{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--text);margin-bottom:5px}
 .sh-sub{font-size:.86rem;font-weight:600;color:var(--text2);margin-bottom:18px}
@@ -850,86 +862,268 @@ function buildVariants(){
 const TIPS_DATA = {
   complementario:{
     sections:[
-      {icon:'💡',title:'Luz y Sombra de Impacto',sub:'El uso más clásico en ilustración',
+      {icon:'💡',title:'Luz y Sombra de Impacto',sub:'El uso más poderoso del complementario',
        rows:[
-         {icon:'☀️',title:'Luz cálida + sombra fría',desc:'Si tu luz es naranja/amarilla (como el sol), pon sombras azules/violetas. Si tu luz es fría (luna, pantalla), pon sombras cálidas. Este contraste hace la iluminación súper convincente.',example:'Luz dorada → sombra azul-morada'},
-         {icon:'🌅',title:'Cielos al atardecer',desc:'El cielo naranja-rojo contrasta con el suelo o siluetas en azul. Es la naturaleza usando complementarios automáticamente.',example:'Naranja cielo + azul mar/tierra'},
-         {icon:'👁️',title:'Punto focal irresistible',desc:'Pon el color complementario justo donde quieres que el ojo del espectador vaya primero. Funciona como un imán visual.',example:'Personaje rojo en fondo verde'},
+         {icon:'☀️',title:'Luz cálida → sombra fría',desc:'Luz naranja/amarilla (sol, fuego) = sombras azules/violetas. Luz fría (luna, pantalla) = sombras cálidas. Esto viene de la física real.',example:'Luz dorada → sombra azul-morada'},
+         {icon:'🌅',title:'Cielos al atardecer',desc:'Naranja-rojo en el cielo contrasta automáticamente con azul en el suelo/mar. La naturaleza usa complementarios todo el tiempo.',example:'Cielo naranja + mar azul'},
+         {icon:'👁️',title:'Punto focal irresistible',desc:'Pon el complementario exactamente donde quieres que mire el espectador. El ojo va directo ahí como un imán.',example:'Fruta roja en canasta verde'},
+         {icon:'🔆',title:'Nunca uses el complementario puro al 100%',desc:'Desatura un poco uno de los dos. Complementarios puros al 100% vibran y cansan la vista. Un 70-80% de saturación en uno se ve mucho mejor.',example:'Rojo brillante + verde grisáceo suave'},
+         {icon:'🌙',title:'Complementario como luz de acento',desc:'Usa el complementario solo en las luces de borde (rim light) del personaje. Pequeña cantidad = gran impacto sin sobrecargar.',example:'Personaje azul + delgado borde naranja brillante'},
        ]},
-      {icon:'🎭',title:'Contraste y Drama',sub:'Para composiciones con tensión visual',
+      {icon:'🎭',title:'Contraste y Composición',sub:'Para hacer que todo destaque',
        rows:[
-         {icon:'⚡',title:'Vibración cromática',desc:'Cuando dos complementarios se tocan en el borde, el ojo "vibra" y se siente tensión. Úsalo para energía, peligro o electricidad.',example:'Borde rojo-cian en escenas de acción'},
-         {icon:'🦸',title:'Héroe vs Villano',desc:'Colorea al héroe y al villano con complementarios. El contraste refuerza su oposición sin necesidad de palabras.',example:'Héroe azul + villano naranja (Spider-Man vs. Vulture)'},
-         {icon:'🎯',title:'Fondo que no compite',desc:'Desatura el complementario del fondo para que el personaje principal brille sin perder la armonía.',example:'Personaje rojo + fondo verde grisáceo'},
+         {icon:'⚡',title:'Vibración cromática = tensión',desc:'Cuando dos complementarios se tocan en el borde, el ojo "vibra". Úsalo para energía, peligro, electricidad, magia.',example:'Borde rojo-cian en escenas de acción'},
+         {icon:'🦸',title:'Héroe vs Villano',desc:'Colorea héroe y villano con complementarios. El contraste visual refuerza su conflicto sin palabras.',example:'Spider-Man (azul-rojo) vs Vulture (verde)'},
+         {icon:'🎯',title:'Fondo desaturado, sujeto saturado',desc:'Pon el complementario en el fondo pero desaturado al 20-30%. El sujeto en el color base saturado al 100%. La armonía se mantiene y el contraste explota.',example:'Personaje rojo saturado + fondo verde pálido'},
+         {icon:'🏢',title:'UI y botones de llamada a la acción',desc:'El botón más importante de una interfaz debe ser el complementario del color dominante. El usuario lo ve primero inconscientemente.',example:'App azul + botón CTA naranja'},
+         {icon:'📸',title:'Fotografía y retratos',desc:'Fondo en el complementario suave del tono de piel hace que la persona destaque de forma natural y profesional.',example:'Piel cálida + fondo azul-verde suave'},
+       ]},
+      {icon:'🎨',title:'Mezcla y Neutrales',sub:'Cómo crear grises y cafés vivos',
+       rows:[
+         {icon:'🟤',title:'Mezcla complementarios = café/gris vivo',desc:'Al mezclar dos complementarios en pintura/digital obtienes marrones y grises que tienen "temperatura". Son neutros vivientes, no grises muertos.',example:'Rojo + verde = café cálido rojizo'},
+         {icon:'🌫️',title:'Sombras cromáticas, no negras',desc:'En vez de negro puro, usa el complementario muy oscuro. Las sombras tienen color y la pintura cobra vida inmediatamente.',example:'Sombra de naranja = azul oscuro, no negro'},
+         {icon:'✨',title:'Destellos y brillos',desc:'Un destello blanco-complementario sobre tu color base da sensación de material brillante o húmedo sin perder la armonía.',example:'Bola roja brillante con destello cian'},
        ]},
     ]},
   analogo:{
     sections:[
-      {icon:'🌫️',title:'Sombreado Natural',sub:'El secreto del sombreado suave profesional',
+      {icon:'🌫️',title:'Sombreado Natural y Suave',sub:'El secreto del sombreado profesional',
        rows:[
-         {icon:'🎨',title:'Sombras sin grises',desc:'En vez de agregar negro o gris para sombrear, mueve el tono hacia el vecino más frío/oscuro de la rueda. Las sombras se ven vivas y naturales, no sucias.',example:'Piel amarilla → sombra naranja → sombra roja'},
-         {icon:'✨',title:'Luz de relleno',desc:'La luz de relleno (luz secundaria que ilumina sombras) puede ser el color análogo del lado contrario. Da profundidad sin romper la armonía.',example:'Luz principal amarilla + relleno verde limón'},
-         {icon:'🌊',title:'Transiciones de piel',desc:'La piel humana va del amarillo-rosa en zonas iluminadas al rojo-naranja en zonas medias y al rojo-violeta en sombras profundas. Son análogos.',example:'Amarillo → naranja → rojo-marrón → violeta'},
+         {icon:'🎨',title:'Sombras sin gris: mueve el tono',desc:'Para sombrear, mueve el color hacia el vecino más frío y oscuro de la rueda. Las sombras se ven vivas, no sucias.',example:'Piel amarilla → sombra naranja → sombra roja profunda'},
+         {icon:'✨',title:'Luz de relleno análoga',desc:'La luz secundaria (relleno) puede ser el análogo del lado opuesto. Da profundidad sin romper la armonía.',example:'Luz principal amarilla + relleno verde lima'},
+         {icon:'🌊',title:'La piel humana ES análoga',desc:'La piel va de amarillo-rosa (luz) → naranja (media) → rojo-violeta (sombra profunda). Son análogos naturales. Úsalos exactamente así.',example:'Amarillo → naranja → rojo-marrón → rojo-violeta'},
+         {icon:'🐾',title:'Pelo y pelaje con profundidad',desc:'El pelo nunca es un solo color. Añade análogos más cálidos en luces y más fríos/oscuros en sombras. El pelo se ve real al instante.',example:'Pelo marrón: luz naranja-miel, sombra marrón-rojizo-oscuro'},
+         {icon:'💎',title:'Gemas y cristales',desc:'Los análogos crean el efecto de refracción de luz en piedras preciosas. Capas de análogos de azul dan el efecto zafiro.',example:'Esmeralda: verde-amarillo, verde, verde-azul, verde-negro'},
        ]},
-      {icon:'🏞️',title:'Atmósfera y Ambientes',sub:'Para crear sensaciones de lugar y hora',
+      {icon:'🏞️',title:'Atmósfera y Ambientes',sub:'Crear mood de lugar y momento',
        rows:[
-         {icon:'🌲',title:'Bosques y naturaleza',desc:'Los verdes análogos (amarillo-verde, verde puro, verde-azul) dan profundidad a la vegetación. Varía la saturación para separar planos.',example:'Primer plano verde brillante → fondo verde-azul apagado'},
-         {icon:'🌅',title:'Golden hour / Blue hour',desc:'La hora dorada vive en los análogos del amarillo-naranja-rojo. La hora azul en cyan-azul-violeta. Usa solo esos análogos para mantener el mood.',example:'Toda la escena en amarillo-naranja-dorado'},
-         {icon:'🌊',title:'Perspectiva atmosférica',desc:'Los objetos lejanos pierden saturación y se vuelven más azulados. Mueve los colores hacia el análogo frío conforme se alejan.',example:'Montaña cercana verde saturado → lejana azul-verde desaturado'},
+         {icon:'🌲',title:'Vegetación con profundidad',desc:'Los verdes análogos (amarillo-verde, verde, verde-azul) separan planos naturalmente. Primer plano brillante, lejos apagado y azulado.',example:'Hierba frente: verde-amarillo brillante → bosque: verde-azul apagado'},
+         {icon:'🌅',title:'Golden hour (hora dorada)',desc:'Toda la escena en análogos de amarillo-naranja-rojo. No mezcles fríos. La consistencia análoga crea el mood atardecer perfectamente.',example:'Escena completa: amarillo pálido → naranja → rojo dorado'},
+         {icon:'🌊',title:'Perspectiva atmosférica',desc:'Objetos lejanos = más azulados y menos saturados. Mueve los colores hacia el análogo frío conforme se alejan en la escena.',example:'Montaña cercana: verde saturado → lejana: verde-azul desaturado'},
+         {icon:'🌃',title:'Ciudades nocturnas y neón',desc:'Las luces de neón en noche oscura funcionan mejor como análogos. Mezcla análogos de azul-violeta-magenta para ese ambiente cyberpunk.',example:'Neón: azul-cian, azul, azul-violeta sobre negro'},
+         {icon:'🏜️',title:'Desiertos y tierras cálidas',desc:'Toda la paleta del desierto son análogos: amarillo arena, naranja tierra, rojo arcilla, marrón roca. Usar solo estos crea cohesión visual.',example:'Desierto: amarillo→naranja→rojo→marrón-rojizo'},
+         {icon:'❄️',title:'Nieve y hielo',desc:'La nieve tiene más análogos de azul y violeta de lo que crees. Añade azul-violeta en sombras profundas y cian en zonas iluminadas.',example:'Nieve: blanco-azulado, cian sombra, azul-violeta sombra profunda'},
+       ]},
+      {icon:'🎬',title:'Narrativa y Emoción',sub:'Contar historias con analogías de color',
+       rows:[
+         {icon:'🟡',title:'Analogía cálida = comodidad, nostalgia',desc:'Escenas de hogar, familia, infancia: usa análogos cálidos (amarillo-naranja-rojo). El cerebro asocia estos tonos con calor y seguridad.',example:'Cocina familiar: amarillo-naranja-dorado'},
+         {icon:'🔵',title:'Analogía fría = misterio, tecnología',desc:'Espacios futuristas, investigación, frialdad emocional: análogos de azul-cian-violeta. Comunican distancia o avance.',example:'Laboratorio: cian→azul→azul-violeta'},
+         {icon:'🟢',title:'Analogía verde = naturaleza, calma, salud',desc:'Spas, apps de meditación, clínicas modernas usan solo análogos de verde. La mente se relaja automáticamente.',example:'App de salud: verde-amarillo, verde, verde-azul'},
        ]},
     ]},
   triada:{
     sections:[
-      {icon:'🎨',title:'Diseño de Personaje',sub:'Para personajes memorables y coloridos',
+      {icon:'🎨',title:'Diseño de Personaje',sub:'Personajes memorables e icónicos',
        rows:[
-         {icon:'👒',title:'Regla 60-30-10',desc:'Usa un color de la tríada para el 60% del personaje (cuerpo/ropa principal), otro para el 30% (detalles/accesorios) y el tercero para el 10% (acentos pequeños). Equilibrio perfecto.',example:'Rojo 60% + amarillo 30% + azul 10%'},
-         {icon:'🦄',title:'Personajes fantásticos',desc:'La tríada es perfecta para criaturas mágicas, aliens o personajes de videojuego. La diversidad de colores los hace visualmente únicos e icónicos.',example:'Pokémon, personajes de anime'},
-         {icon:'🎪',title:'Escenas festivas o caóticas',desc:'Carnavales, mercados, batallas con magia de colores. La tríada da energía y alegría sin sentirse random.',example:'Escena de mercado medieval colorido'},
+         {icon:'👒',title:'Regla 60-30-10 (infalible)',desc:'Color 1 = 60% del personaje (cuerpo principal). Color 2 = 30% (ropa secundaria, detalles grandes). Color 3 = 10% (acentos, ojos, botones). Equilibrio perfecto.',example:'Héroe: azul 60% + rojo 30% + amarillo 10%'},
+         {icon:'🦄',title:'Criaturas fantásticas e icónicas',desc:'La tríada hace personajes visualmente únicos. Cada color de la tríada cubre una parte del cuerpo/personalidad.',example:'Dragón: escamas verdes + fuego rojo + ojos amarillos'},
+         {icon:'🎪',title:'Escenas festivas y caóticas',desc:'Para mercados, carnavales, batallas mágicas: la tríada da energía sin parecer random. Hay orden dentro del caos.',example:'Mercado medieval: puestos rojos, dorados, azules'},
+         {icon:'🃏',title:'Logos y marcas con tríada',desc:'Muchos logos icónicos usan tríadas. Son visualmente ricas pero equilibradas. Perfectas para marcas que quieren ser recordadas.',example:'Pepsi, Google, NBC usan variaciones de tríada'},
+         {icon:'🎠',title:'Tipografía colorida',desc:'Usa los 3 colores de la tríada en letras de un título. El texto se vuelve arte visual. Alterna los colores en palabras o letras.',example:'Título de cartel: letra roja, azul, amarilla'},
        ]},
-      {icon:'⚖️',title:'Balance Visual',sub:'Cómo no hacer que se vea saturado',
+      {icon:'⚖️',title:'Balance y Control',sub:'Cómo no arruinarlo',
        rows:[
-         {icon:'🎚️',title:'Un color domina',desc:'Elige uno de los tres como protagonista (más saturado/usado) y usa los otros dos como apoyos. Si los tres compiten igual se ve caótico.',example:'Azul dominante + toques de rojo y amarillo'},
-         {icon:'🌫️',title:'Desatura dos de tres',desc:'Satura mucho solo el color principal. Los otros dos úsalos en versiones más apagadas o claras. El contraste hace que el principal explote.',example:'Rojo saturado + azul grisáceo + amarillo pálido'},
+         {icon:'🎚️',title:'Un color manda SIEMPRE',desc:'Uno de los tres debe ocupar más espacio y más saturación. Si los tres compiten igual, la imagen da dolor de cabeza.',example:'Azul 60% + toques de rojo y amarillo'},
+         {icon:'🌫️',title:'Desatura dos, satura uno',desc:'Pon el color principal al 100% de saturación. Los otros dos al 40-60%. El principal explota visualmente.',example:'Rojo vibrante + azul grisáceo + amarillo pálido'},
+         {icon:'🔄',title:'Varía el valor entre los tres',desc:'Uno claro, uno medio, uno oscuro. Si los tres tienen el mismo brillo se neutralizan.',example:'Rojo oscuro + amarillo brillante + azul medio'},
+         {icon:'🖼️',title:'Tríada en fondos: usa el más neutro',desc:'El fondo lleva el color más desaturado/apagado de los tres. Los otros dos en primer plano y acentos.',example:'Fondo azul desaturado + personaje rojo + detalles dorados'},
+       ]},
+      {icon:'🌍',title:'Aplicaciones en el Mundo Real',sub:'Dónde ver y usar tríadas',
+       rows:[
+         {icon:'🎡',title:'Diseño de juegos (game art)',desc:'Los mundos de juego usan tríadas para hacer zonas reconocibles. Cada bioma puede tener su propia tríada.',example:'Zona de fuego: rojo+naranja+amarillo | Zona mágica: violeta+verde+dorado'},
+         {icon:'📱',title:'UI con tríada controlada',desc:'Color primario para fondos, secundario para botones importantes, terciario solo para notificaciones urgentes. La jerarquía se crea sola.',example:'App: azul fondo + naranja CTA + verde éxito'},
+         {icon:'🛍️',title:'Packaging y productos',desc:'Los productos en tienda que más destacan en estantería usan tríadas. El ojo humano los detecta antes que monocromáticos.',example:'Cereales, snacks: packaging rojo+azul+amarillo'},
        ]},
     ]},
   tetrada:{
     sections:[
-      {icon:'🌍',title:'Escenas Complejas',sub:'Para mundos ricos en detalles visuales',
+      {icon:'🌍',title:'Escenas y Mundos Complejos',sub:'Cuando necesitas variedad real',
        rows:[
-         {icon:'🏙️',title:'Fondos elaborados',desc:'Cuando tienes muchos elementos en escena (ciudad, bosque, dungeon) la tétrada permite colorear cada grupo de elementos con un color diferente sin que se vea incoherente.',example:'Ciudad: edificios cálidos + cielo frío + vegetación + luces neón'},
-         {icon:'🎮',title:'Mapas y mundos de juego',desc:'Las zonas de un mapa (hielo, fuego, bosque, desierto) pueden tener cada una un color de la tétrada. Guían al jugador visualmente.',example:'Zona roja + zona azul + zona verde + zona amarilla'},
-         {icon:'👥',title:'Grupos de personajes',desc:'Si tienes 4 personajes de un equipo, dale a cada uno un color de la tétrada. Se identifican rápido y juntos se ven equilibrados.',example:'Los 4 Power Rangers'},
+         {icon:'🏙️',title:'Ciudades y fondos elaborados',desc:'Con 4 colores puedes colorear cada grupo de elementos (edificios, cielo, vegetación, luces) sin que se vea incoherente.',example:'Ciudad: edificios cálidos + cielo frío + vegetación + luces neón'},
+         {icon:'🎮',title:'Mapas y zonas de juego',desc:'Cada zona del mapa lleva un color de la tétrada. Los jugadores navegan intuitivamente porque asocian color con zona.',example:'Zona roja=fuego, azul=agua, verde=bosque, amarilla=desierto'},
+         {icon:'👥',title:'Equipos de 4 personajes',desc:'Dale a cada personaje un color de la tétrada. En grupo se ven equilibrados. El espectador identifica cada uno instantáneamente.',example:'Power Rangers, Ninja Turtles, The Beatles en medios visuales'},
+         {icon:'🎭',title:'Escenas de 4 actos',desc:'Asigna un color a cada momento emocional de una historia. La narrativa visual se lee sin texto.',example:'Alegría=amarillo, conflicto=rojo, tristeza=azul, resolución=verde'},
+         {icon:'📊',title:'Infografías y dashboards',desc:'La tétrada permite 4 categorías de datos visualmente distintas sin confusión. Cada color = un tipo de dato.',example:'Dashboard: ventas=azul, gastos=rojo, usuarios=verde, tiempo=amarillo'},
        ]},
-      {icon:'⚠️',title:'Cómo no arruinarlo',sub:'La tétrada es la más difícil de usar',
+      {icon:'⚠️',title:'Cómo no arruinarlo',sub:'La tétrada es la más difícil',
        rows:[
-         {icon:'🚨',title:'Uno manda, tres apoyan',desc:'SIEMPRE elige un color principal que ocupe más del 50% de la escena. Los otros tres son detalles. Si los cuatro compiten en espacio y saturación, la imagen da dolor de cabeza.',example:'Fondo azul 50% + detalles rojo/verde/amarillo'},
-         {icon:'🎚️',title:'Varía el valor (oscuro/claro)',desc:'Aunque tengas cuatro colores distintos, si los pones todos al mismo brillo y saturación se cancelan. Alterna oscuros y claros para crear jerarquía.',example:'Dos colores brillantes + dos apagados'},
+         {icon:'🚨',title:'Uno manda, TRES apoyan (obligatorio)',desc:'El color principal debe ocupar 50%+ del espacio. Los otros tres son detalles. Si los cuatro compiten igual, la imagen da migraña.',example:'Fondo azul 50% + detalles rojo/verde/amarillo'},
+         {icon:'🎚️',title:'Alterna oscuros y claros',desc:'Aunque sean 4 colores diferentes, si todos tienen el mismo brillo se cancelan. Necesitas variedad de valor (oscuro/claro).',example:'Dos colores brillantes + dos apagados/oscuros'},
+         {icon:'📏',title:'Jerarquía de tamaño = jerarquía de saturación',desc:'El elemento más grande lleva el color más desaturado. El más pequeño el más saturado. Así el foco va siempre al detalle correcto.',example:'Fondo grande desaturado + ícono pequeño hipersaturado'},
+         {icon:'🌫️',title:'Prueba en escala de grises primero',desc:'Convierte tu diseño a blanco y negro. Si se ve bien en grises, funcionará en color. Si no se ve bien en grises, el color no lo salvará.',example:'Diseño en escala de grises primero, color después'},
+       ]},
+      {icon:'💡',title:'Trucos Profesionales',sub:'Lo que hacen los expertos',
+       rows:[
+         {icon:'🔗',title:'Une con neutrales',desc:'Entre dos colores de la tétrada que choquen, pon un negro, blanco o gris. Los separa y la vista descansa.',example:'Rojo | separador negro | verde'},
+         {icon:'🎨',title:'Tétrada de baja saturación = elegancia',desc:'Usa los 4 colores pero todos en versiones desaturadas/pastel. Se ve sofisticado y lujoso en vez de caótico.',example:'Rosa pálido + azul cielo + verde salvia + dorado apagado'},
+         {icon:'🌗',title:'Divide el espacio en 4 cuadrantes',desc:'Asigna cada color de la tétrada a un cuadrante de la imagen. Crea equilibrio visual perfecto y es fácil de controlar.',example:'Ilustración dividida en 4 zonas de color'},
        ]},
     ]},
   split:{
     sections:[
-      {icon:'🎯',title:'Contraste Suavizado',sub:'Más sofisticado que el complementario puro',
+      {icon:'🎯',title:'Contraste Sofisticado',sub:'Más refinado que el complementario puro',
        rows:[
-         {icon:'🧑‍🎨',title:'Personaje sobre fondo',desc:'Pon al personaje en el color base y el fondo en uno de los dos split. El contraste es real pero no agresivo, se ve más refinado que el complementario directo.',example:'Personaje violeta + fondo amarillo-verdoso'},
-         {icon:'🌙',title:'Iluminación de dos fuentes',desc:'Una fuente de luz en cada color split iluminando al personaje desde lados distintos. La diferencia sutil entre los dos split da dimensión sin violencia visual.',example:'Luz izquierda amarillo-verde + luz derecha amarillo-naranja'},
-         {icon:'🎬',title:'Posters y portadas',desc:'Los diseñadores de Hollywood usan split mucho para posters. El protagonista en un color, el fondo en split. Se ve cinematográfico automáticamente.',example:'Naranja protagonista + fondo azul-verde/azul-violeta'},
+         {icon:'🧑‍🎨',title:'Personaje sobre fondo con split',desc:'Sujeto en el color base, fondo en uno de los dos split. El contraste es real pero más suave. Se ve cinematográfico.',example:'Personaje violeta + fondo amarillo-verdoso'},
+         {icon:'🌙',title:'Iluminación de dos fuentes sutiles',desc:'Una fuente de luz de cada color split desde lados distintos. La diferencia sutil entre los dos split da dimensión sin violencia visual.',example:'Luz izq: amarillo-verde + luz der: amarillo-naranja'},
+         {icon:'🎬',title:'Posters de cine y portadas',desc:'Hollywood usa split constantemente para posters. Protagonista en el color base, fondo split. El resultado es automáticamente cinematográfico.',example:'Naranja protagonista + fondo azul-verde/azul-violeta'},
+         {icon:'🌸',title:'Más romántico que el complementario',desc:'El split se siente menos agresivo. Para amor, fantasía, misterio suave funciona mejor que el complementario directo.',example:'Rosa base + split turquesa y violeta'},
+         {icon:'🦋',title:'Degradados de split = magia',desc:'Haz un degradado que vaya del color base hacia uno de los split y luego al otro. El resultado parece casi iridiscente.',example:'Degradado: azul → verde → azul-violeta'},
        ]},
-      {icon:'💎',title:'Sutileza y Profesionalismo',sub:'Para cuando quieres contraste elegante',
+      {icon:'💎',title:'Sutileza y Profesionalismo',sub:'Para contraste elegante',
        rows:[
-         {icon:'👔',title:'Diseño de ropa/moda',desc:'El split permite mezclar colores que contrastan sin chocar. Perfecto para diseñar outfits donde quieres que combinen pero con personalidad.',example:'Camisa azul + pantalón amarillo-verde + zapatos amarillo-naranja'},
-         {icon:'🌺',title:'Flores y naturaleza detallada',desc:'Los pétalos, hojas y tallo pueden llevar el color base y los dos split respectivamente. La naturaleza hace esto constantemente.',example:'Flor roja + hojas verde-amarillo + tallo verde-azulado'},
+         {icon:'👔',title:'Moda y outfits',desc:'El split permite combinar prendas que contrastan sin chocar. Más sofisticado que complementario para uso en ropa.',example:'Camisa azul + pantalón verde-amarillo + zapatos verde-azul'},
+         {icon:'🌺',title:'Flores y naturaleza detallada',desc:'Pétalos, hojas y tallo con el base y los dos split. La naturaleza hace esto constantemente en flores reales.',example:'Flor roja + hojas verde-amarillo + tallo verde-azulado'},
+         {icon:'🏛️',title:'Arquitectura e interiores',desc:'Pared principal en base, mobiliario en un split, acentos decorativos en el otro. El espacio se siente harmonioso pero interesante.',example:'Pared azul + sofá verde-turquesa + cojines verde-amarillo'},
+         {icon:'🎸',title:'Arte de álbumes y portadas',desc:'Los artistas musicales usan split mucho más que complementario. Tiene energía pero no agresividad.',example:'Fondo cian + artista naranja-rojo + acentos amarillo-naranja'},
+         {icon:'💻',title:'Branding moderno',desc:'Marcas tech/creativas actuales usan split para parecer "diferentes pero accesibles". Más fresco que complementario clásico.',example:'Logo azul + web con toques verde-amarillo y verde-azul'},
+       ]},
+      {icon:'🔬',title:'Split en Detalle',sub:'Por qué funciona tan bien',
+       rows:[
+         {icon:'📐',title:'Por qué el split funciona',desc:'El complementario puro (180°) da máximo contraste pero puede sentirse duro. Los split (150° y 210°) dan contraste real pero con un ángulo que "suaviza" la tensión.',example:'Complementario: exactamente opuesto | Split: casi opuesto'},
+         {icon:'🔄',title:'Rota el split para variar',desc:'Puedes decidir qué split usa más espacio. No tienen que ser iguales. Uno al 25% y otro al 10% cambia completamente el feeling.',example:'Base 65% + split1 25% + split2 10% = más dramático'},
        ]},
     ]},
 };
 
 const TIPS_GLOBAL=[
-  {icon:'🌑',title:'Regla universal de la sombra',text:'Las sombras casi nunca son negras ni grises. Son el color base más oscuro, más saturado y ligeramente desplazado hacia el frío (azul/violeta). Prueba esto y tu arte cambia de nivel inmediatamente.'},
-  {icon:'☀️',title:'Temperatura de luz = temperatura opuesta en sombra',text:'Luz cálida (sol, fuego, lámpara) → sombras frías. Luz fría (luna, noche, LED azul) → sombras cálidas. Esta regla viene de la física real y es lo que hace el arte convincente.'},
-  {icon:'🎯',title:'Menos colores = más impacto',text:'Los artistas profesionales suelen usar 2-3 colores máximo por escena. Cuantos menos colores uses, más poderoso es cada uno. Limítate primero, luego añade.'},
-  {icon:'🔲',title:'El valor (oscuro/claro) es más importante que el color',text:'Si conviertes tu dibujo a blanco y negro y se ve bien, el color también funcionará. El valor da forma y profundidad. El color da emoción. Prioriza el valor.'},
-  {icon:'🌈',title:'Desatura conforme alejás',text:'Los objetos lejanos pierden saturación (perspectiva atmosférica). Un árbol cercano es verde vibrante. Uno lejano es gris-verdoso. Aplica esto y la profundidad aparece sola.'},
-  {icon:'✏️',title:'El color del contorno importa',text:'Los contornos negros en personajes coloridos se ven planos. Prueba contornos del color base pero más oscuro y saturado. O del color complementario oscuro. El personaje cobra vida.'},
+  {icon:'🌑',title:'Sombras = color base + frío + oscuro',text:'Las sombras casi nunca son negras ni grises. Son el color base más oscuro, más saturado y ligeramente desplazado hacia el frío. Prueba esto una vez y tu arte cambia de nivel para siempre.'},
+  {icon:'☀️',title:'Luz cálida = sombra fría (siempre)',text:'Luz naranja/amarilla (sol, fuego, lámpara) → sombras azules/frías. Luz fría (luna, LED azul, pantalla) → sombras cálidas/naranjas. Regla física real que hace el arte convincente.'},
+  {icon:'🎯',title:'Menos colores = más impacto',text:'Profesionales usan 2-3 colores máximo por escena. Cada color que añades divide la atención del espectador. Limítate primero, añade si es necesario, nunca al revés.'},
+  {icon:'🔲',title:'El valor importa más que el color',text:'Si conviertes tu obra a blanco y negro y se ve bien, el color también funcionará. El valor (claro/oscuro) da forma y profundidad. El color da emoción. Prioriza valor primero.'},
+  {icon:'🌈',title:'Desatura conforme te alejas',text:'Perspectiva atmosférica: objetos lejanos pierden saturación y se azulan. Árbol cercano: verde vibrante. Lejano: gris-verdoso apagado. Aplica esto y la profundidad aparece sola.'},
+  {icon:'✏️',title:'El contorno tiene color, no es negro',text:'Contornos negros en personajes coloridos se ven planos. Usa el color base más oscuro y saturado para los contornos. O el complementario oscuro. El personaje cobra vida inmediatamente.'},
+  {icon:'👁️',title:'El ojo sigue el contraste más alto',text:'El punto de mayor contraste de valor o color es donde mira el espectador primero. Controla eso y controlas la narrativa visual de toda la imagen.'},
+  {icon:'🔴',title:'Rojo llama la atención primero',text:'El ojo humano detecta rojo antes que cualquier otro color. Si no quieres que algo destaque demasiado, evita el rojo. Si sí quieres que destaque, ponle rojo o naranja.'},
+  {icon:'💧',title:'La saturación crea distancia',text:'Elementos saturados parecen más cercanos. Elementos desaturados parecen más lejanos. Usa esto para crear profundidad sin perspectiva geométrica.'},
+  {icon:'🌡️',title:'Mezcla cálido y frío en CADA elemento',text:'Incluso un elemento "monocolór" se ve más vivo si tiene una zona ligeramente más cálida (luz) y una más fría (sombra). Nunca uses un color completamente plano.'},
+  {icon:'🎭',title:'Colores oscuros avanzan, claros retroceden',text:'Fondos claros hacen que los objetos oscuros "salten". Fondos oscuros hacen que los objetos claros "brillen". Úsalo conscientemente para jerarquía visual.'},
+  {icon:'🔮',title:'Los neutrales hacen brillar los colores',text:'Un gris o beige rodeando un color puro lo hace parecer más intenso. Si quieres que un color "explote", rodéalo de neutrales, no de otros colores.'},
 ];
+
+// ── SPHERE PREVIEW ──
+function drawSphere(canvas, colors, label){
+  const size = canvas.width;
+  const ctx2 = canvas.getContext('2d');
+  const cx = size/2, cy = size/2, r = size/2 - 2;
+  ctx2.clearRect(0,0,size,size);
+
+  if(colors.length === 1){
+    // Single color sphere
+    const g = ctx2.createRadialGradient(cx*0.6, cy*0.55, r*0.05, cx, cy, r);
+    g.addColorStop(0, lightenHex(colors[0], 0.6));
+    g.addColorStop(0.35, colors[0]);
+    g.addColorStop(0.75, darkenHex(colors[0], 0.45));
+    g.addColorStop(1, darkenHex(colors[0], 0.75));
+    ctx2.beginPath(); ctx2.arc(cx,cy,r,0,Math.PI*2);
+    ctx2.fillStyle = g; ctx2.fill();
+  } else if(colors.length === 2){
+    // Two-color sphere: gradient from left to right
+    const g = ctx2.createLinearGradient(cx-r, cy, cx+r, cy);
+    g.addColorStop(0, colors[0]);
+    g.addColorStop(0.5, blendHex(colors[0], colors[1], 0.5));
+    g.addColorStop(1, colors[1]);
+    ctx2.beginPath(); ctx2.arc(cx,cy,r,0,Math.PI*2);
+    ctx2.fillStyle = g; ctx2.fill();
+    // Overlay shading
+    const gs = ctx2.createRadialGradient(cx*0.6, cy*0.55, r*0.05, cx, cy, r);
+    gs.addColorStop(0, 'rgba(255,255,255,0.45)');
+    gs.addColorStop(0.4, 'rgba(255,255,255,0.0)');
+    gs.addColorStop(0.8, 'rgba(0,0,0,0.0)');
+    gs.addColorStop(1, 'rgba(0,0,0,0.55)');
+    ctx2.beginPath(); ctx2.arc(cx,cy,r,0,Math.PI*2);
+    ctx2.fillStyle = gs; ctx2.fill();
+  } else {
+    // Multi-color sphere: angular gradient
+    const step = (Math.PI*2) / colors.length;
+    colors.forEach((hex, i) => {
+      const a1 = i * step - Math.PI/2;
+      const a2 = (i+1) * step - Math.PI/2;
+      const g = ctx2.createRadialGradient(cx,cy,0,cx,cy,r);
+      g.addColorStop(0, blendHex(hex, '#ffffff', 0.3));
+      g.addColorStop(0.6, hex);
+      g.addColorStop(1, darkenHex(hex, 0.5));
+      ctx2.beginPath();
+      ctx2.moveTo(cx,cy);
+      ctx2.arc(cx,cy,r,a1,a2);
+      ctx2.closePath();
+      ctx2.fillStyle = g; ctx2.fill();
+    });
+    // Shading overlay
+    const gs = ctx2.createRadialGradient(cx*0.62, cy*0.58, r*0.04, cx, cy, r);
+    gs.addColorStop(0, 'rgba(255,255,255,0.5)');
+    gs.addColorStop(0.38, 'rgba(255,255,255,0.05)');
+    gs.addColorStop(0.75, 'rgba(0,0,0,0.0)');
+    gs.addColorStop(1, 'rgba(0,0,0,0.5)');
+    ctx2.beginPath(); ctx2.arc(cx,cy,r,0,Math.PI*2);
+    ctx2.fillStyle = gs; ctx2.fill();
+  }
+
+  // Specular highlight
+  const sp = ctx2.createRadialGradient(cx*0.58, cy*0.52, 0, cx*0.62, cy*0.57, r*0.28);
+  sp.addColorStop(0, 'rgba(255,255,255,0.82)');
+  sp.addColorStop(0.4, 'rgba(255,255,255,0.2)');
+  sp.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx2.beginPath(); ctx2.arc(cx,cy,r,0,Math.PI*2);
+  ctx2.fillStyle = sp; ctx2.fill();
+
+  // Clip circle edge
+  ctx2.beginPath(); ctx2.arc(cx,cy,r,0,Math.PI*2);
+  ctx2.strokeStyle='rgba(0,0,0,0.12)'; ctx2.lineWidth=1.5; ctx2.stroke();
+}
+
+function lightenHex(hex, amt){
+  const[r,g,b]=hexToRgbArr(hex);
+  return`rgb(${Math.min(255,Math.round(r+(255-r)*amt))},${Math.min(255,Math.round(g+(255-g)*amt))},${Math.min(255,Math.round(b+(255-b)*amt))})`;
+}
+function darkenHex(hex, amt){
+  const[r,g,b]=hexToRgbArr(hex);
+  return`rgb(${Math.round(r*(1-amt))},${Math.round(g*(1-amt))},${Math.round(b*(1-amt))})`;
+}
+function blendHex(hex1, hex2, t){
+  const[r1,g1,b1]=hexToRgbArr(hex1);
+  const[r2,g2,b2]=hex2.startsWith('#')?hexToRgbArr(hex2):[255,255,255];
+  return`rgb(${Math.round(r1+(r2-r1)*t)},${Math.round(g1+(g2-g1)*t)},${Math.round(b1+(b2-b1)*t)})`;
+}
+
+function buildSpheresHTML(){
+  const colors = paletteColors();
+  const H = HARMONIES[S.harmony];
+  const sz = 72;
+  let html = `<div class="spheres-wrap" id="spheresWrap">`;
+
+  // Individual spheres
+  colors.forEach((c,i)=>{
+    html += `<div class="sphere-item">
+      <canvas class="sphere-canvas" width="${sz}" height="${sz}" data-hex="${c.hex}" data-idx="${i}" style="width:${sz}px;height:${sz}px"></canvas>
+      <div class="sphere-label">${H.roles[i]||'Color '+(i+1)}</div>
+    </div>`;
+    if(i < colors.length-1){
+      html += `<div class="sphere-blend-arrow">+</div>`;
+    }
+  });
+
+  // Blend sphere
+  html += `<div class="sphere-blend-arrow">→</div>`;
+  html += `<div class="sphere-item">
+    <canvas class="sphere-canvas" width="${sz}" height="${sz}" id="sphereBlend" data-blend="1" style="width:${sz}px;height:${sz}px"></canvas>
+    <div class="sphere-label">Mezcla</div>
+  </div>`;
+
+  html += `</div>`;
+  return html;
+}
+
+function renderSpheres(){
+  const colors = paletteColors();
+  // Individual
+  document.querySelectorAll('.sphere-canvas[data-idx]').forEach(c=>{
+    const idx = parseInt(c.dataset.idx);
+    drawSphere(c, [colors[idx].hex]);
+  });
+  // Blend
+  const blend = document.getElementById('sphereBlend');
+  if(blend) drawSphere(blend, colors.map(c=>c.hex));
+}
 
 function buildTips(){
   const H=HARMONIES[S.harmony];
@@ -939,7 +1133,28 @@ function buildTips(){
     html+=`<button class="th-btn${key===S.harmony?' active':''}" data-th="${key}" style="--th-c:${h.pc}">${h.emoji} ${h.name}</button>`;
   });
   html+=`</div>`;
+
+  // Sphere preview
+  html += `<div class="section-label" style="margin-bottom:0">🔮 Previsualización de colores</div>`;
+  html += buildSpheresHTML();
+
+  // Quick tips strip
+  html += `<div class="section-label" style="margin:14px 0 6px">⚡ Reglas rápidas</div>
+  <div class="quick-tips">`;
+  const quickMap = {
+    complementario:['Máximo contraste','Usa 1 saturado + 1 apagado','Ideal para focos visuales','Complementario en sombras','Evita partes iguales'],
+    analogo:['Armonía natural y suave','Sombras = análogo frío','Sin ruido visual','Perfecto para atmósferas','Máx. 3 análogos juntos'],
+    triada:['60% + 30% + 10%','Un color manda','Desatura 2 de 3','Varía el valor entre los 3','Más energía que análogo'],
+    tetrada:['El más difícil','Un color al 50%+','Alterna claro/oscuro','Une con neutrales','Empieza por la paleta pastel'],
+    split:['Contraste suave y elegante','Más sofisticado que complementario','Dos acentos en vez de uno','Perfecto para moda y branding','Degrada entre los dos split'],
+  };
+  (quickMap[S.harmony]||[]).forEach(tip=>{
+    html+=`<div class="quick-tip"><span>⚡</span>${tip}</div>`;
+  });
+  html+=`</div>`;
+
   // Sections accordion
+  html += `<div style="margin-top:14px">`;
   data.sections.forEach((sec,si)=>{
     html+=`<div class="tip-section">
       <div class="tip-header" data-sec="${si}">
@@ -960,6 +1175,8 @@ function buildTips(){
     });
     html+=`</div></div>`;
   });
+  html += `</div>`;
+
   // Global tips
   html+=`<div class="section-label" style="margin:18px 0 10px">🌟 Consejos universales del color</div><div class="tips-global">`;
   TIPS_GLOBAL.forEach(t=>{
@@ -973,6 +1190,8 @@ function buildTips(){
 }
 
 function bindTipsEv(){
+  // Render spheres after DOM insert
+  requestAnimationFrame(()=>renderSpheres());
   // Harmony selector inside tips
   document.querySelectorAll('.th-btn').forEach(btn=>{
     btn.addEventListener('click',()=>{
