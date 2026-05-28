@@ -4,7 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎨 Rueda de Color Mágica</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap"></noscript>
+<style>
+/* Fuentes del sistema como fallback inmediato */
+body{font-family:'Nunito','Segoe UI',Arial,sans-serif}
+h1,.sel-name,.harm-desc-title,.tip-htitle strong,.qz-title,.qz-rtitle,.sh-title,
+.psych-title,.palette-title,.val-type,.sw-role,.section-label{font-family:'Fredoka One','Segoe UI',Arial,sans-serif}
+</style>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
@@ -43,7 +51,7 @@ header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.35rem,4vw,1.9rem);
 /* ── WHEEL COL ── */
 .wheel-col{display:flex;flex-direction:column;align-items:center;gap:16px}
 .wheel-wrap{position:relative;line-height:0}
-#wheelCanvas{cursor:crosshair;touch-action:none;display:block;filter:drop-shadow(0 12px 32px rgba(0,0,0,.22));border-radius:50%}
+#wheelCanvas{touch-action:none}
 .hover-tip{position:absolute;width:26px;height:26px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 2px rgba(0,0,0,.2),0 4px 14px rgba(0,0,0,.3);pointer-events:none;transform:translate(-50%,-50%);display:none;z-index:10}
 
 /* ── PILLS ── */
@@ -197,6 +205,35 @@ header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.35rem,4vw,1.9rem);
 .qz-restart{padding:13px 32px;border-radius:13px;border:none;background:linear-gradient(135deg,#FF5757,#FF8C42);color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:.97rem;cursor:pointer;transition:all .2s}
 .qz-restart:hover{transform:scale(1.05);box-shadow:0 8px 22px rgba(255,87,87,.4)}
 
+/* ── TIPS TAB ── */
+.tips-harmony-btns{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.th-btn{padding:7px 13px;border-radius:50px;border:2px solid var(--border);background:var(--card2);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.78rem;color:var(--text2);transition:all .2s}
+.th-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.th-btn.active{color:#fff;border-color:var(--th-c,#FF5757);background:var(--th-c,#FF5757)}
+.tip-section{margin-bottom:14px;border-radius:14px;overflow:hidden;border:1.5px solid var(--border)}
+.tip-header{display:flex;align-items:center;gap:10px;padding:13px 15px;cursor:pointer;user-select:none;transition:background .2s}
+.tip-header:hover{background:var(--card2)}
+.tip-icon{font-size:1.3rem;flex-shrink:0}
+.tip-htitle{flex:1}
+.tip-htitle strong{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--text);display:block}
+.tip-htitle span{font-size:.75rem;font-weight:700;color:var(--text3)}
+.tip-arrow{font-size:.75rem;color:var(--text3);transition:transform .25s;flex-shrink:0}
+.tip-arrow.open{transform:rotate(90deg)}
+.tip-body{padding:0 15px;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s}
+.tip-body.open{max-height:800px;padding:4px 15px 14px}
+.tip-row{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--border)}
+.tip-row:last-child{border-bottom:none}
+.tip-row-icon{font-size:1.15rem;flex-shrink:0;margin-top:1px}
+.tip-row-text{flex:1}
+.tip-row-title{font-weight:900;font-size:.85rem;color:var(--text);margin-bottom:2px}
+.tip-row-desc{font-size:.8rem;font-weight:600;color:var(--text2);line-height:1.5}
+.tip-example{display:inline-block;margin-top:5px;padding:4px 10px;border-radius:7px;font-size:.73rem;font-weight:800;background:var(--card2);color:var(--text3);border:1px solid var(--border)}
+.tip-tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:.68rem;font-weight:800;margin:3px 3px 0 0}
+.tips-global{margin-top:4px}
+.tip-global-row{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--card2);border-radius:12px;border:1px solid var(--border);margin-bottom:8px}
+.tip-global-icon{font-size:1.2rem;flex-shrink:0}
+.tip-global-text strong{font-weight:900;font-size:.84rem;color:var(--text);display:block;margin-bottom:2px}
+.tip-global-text p{font-size:.79rem;font-weight:600;color:var(--text2);line-height:1.5}
 /* ── SHARE MODAL ── */
 .sh-title{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--text);margin-bottom:5px}
 .sh-sub{font-size:.86rem;font-weight:600;color:var(--text2);margin-bottom:18px}
@@ -218,6 +255,49 @@ header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.35rem,4vw,1.9rem);
   .quiz-fab{bottom:14px;right:14px;padding:11px 16px;font-size:.84rem}
   header{padding:12px 14px}
 }
+
+/* ── UI IMPROVEMENTS ── */
+/* Wheel instruction hints */
+.wheel-hints{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;max-width:390px;margin-top:-4px}
+.wheel-hint-item{display:flex;align-items:center;gap:5px;font-size:.66rem;font-weight:700;color:var(--text3);background:var(--card);border:1px solid var(--border);padding:4px 9px;border-radius:20px}
+
+/* Better section labels with line */
+.section-label{font-size:.72rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border);border-radius:2px}
+
+/* Better tab indicator */
+.tab{position:relative}
+.tab.active::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--acc);border-radius:3px 3px 0 0}
+
+/* Improved hex tag */
+.hex-tag{border-radius:12px;letter-spacing:.5px;font-size:.9rem;padding:7px 16px;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+
+/* Animated active pill */
+.pill.active{animation:pillanim .35s cubic-bezier(.34,1.56,.64,1)}
+@keyframes pillanim{0%{transform:scale(.92)}100%{transform:translateY(-2px)}}
+
+/* Better WCAG rows */
+.wcag-row{transition:all .15s}
+.wcag-row:hover{background:var(--bg2);transform:translateX(3px)}
+
+/* Export buttons with tooltip */
+.exp-btn{position:relative;border-radius:14px;font-size:.8rem;letter-spacing:.3px}
+
+/* Empty history state */
+.hist-empty{font-size:.75rem;color:var(--text3);font-weight:700;padding:5px 0;font-style:italic}
+
+/* Card smooth hover */
+.card{transition:background .35s,border-color .35s,box-shadow .2s}
+
+/* Harmony desc styled badge */
+.harm-desc{border-left:4px solid var(--acc)}
+
+/* Nicer var swatches */
+.var-sw{border-radius:10px}
+
+/* Selected color card improvements */
+.sel-card{padding:18px 20px}
+.copy-hint{font-size:.62rem;color:var(--text3);font-weight:700;margin-top:3px;opacity:.8}
 </style>
 </head>
 <body>
@@ -230,9 +310,9 @@ header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.35rem,4vw,1.9rem);
       <p class="tagline">Toca, explora y crea paletas increíbles ✨</p>
     </div>
     <div class="header-btns">
-      <button class="icon-btn" id="soundBtn" title="Sonido">🔊</button>
-      <button class="icon-btn" id="shareBtn" title="Compartir paleta">🔗</button>
-      <button class="icon-btn" id="darkBtn" title="Modo oscuro">🌙</button>
+      <button class="icon-btn" id="soundBtn" title="Activar/desactivar sonido">🔊</button>
+      <button class="icon-btn" id="shareBtn" title="Compartir esta paleta con un link">🔗</button>
+      <button class="icon-btn" id="darkBtn" title="Cambiar a modo oscuro">🌙</button>
     </div>
   </div>
 </header>
@@ -243,17 +323,25 @@ header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.35rem,4vw,1.9rem);
   <!-- WHEEL COLUMN -->
   <div class="wheel-col">
     <div class="wheel-wrap">
-      <canvas id="wheelCanvas"></canvas>
+      <div id="canvasWrap" style="display:inline-block;filter:drop-shadow(0 12px 32px rgba(0,0,0,.22));border-radius:50%;overflow:hidden;line-height:0">
+        <canvas id="wheelCanvas" width="300" height="300" style="display:block;width:300px;height:300px;touch-action:none;cursor:crosshair"></canvas>
+      </div>
       <div class="hover-tip" id="hoverTip"></div>
     </div>
 
-    <!-- Pills -->
+    <!-- Usage hints -->
+    <div class="wheel-hints">
+      <div class="wheel-hint-item">🔄 Arrastra el anillo → color</div>
+      <div class="wheel-hint-item">🎯 Centro → brillo y saturación</div>
+    </div>
+
+    <!-- Harmony Pills -->
     <div class="harmony-pills" id="pillsWrap">
-      <button class="pill active" data-h="complementario" style="--pc:#FF5757">⚡ Complementario</button>
-      <button class="pill" data-h="analogo" style="--pc:#3ECFB2">🌊 Análogo</button>
-      <button class="pill" data-h="triada" style="--pc:#FFBD3E">🔺 Tríada</button>
-      <button class="pill" data-h="tetrada" style="--pc:#A855F7">⬛ Tétrada</button>
-      <button class="pill" data-h="split" style="--pc:#F97316">✌️ Split</button>
+      <button class="pill active" data-h="complementario" style="--pc:#FF5757" title="2 colores opuestos en la rueda">⚡ Complementario</button>
+      <button class="pill" data-h="analogo" style="--pc:#3ECFB2" title="3 colores vecinos suaves">🌊 Análogo</button>
+      <button class="pill" data-h="triada" style="--pc:#FFBD3E" title="3 colores en triángulo">🔺 Tríada</button>
+      <button class="pill" data-h="tetrada" style="--pc:#A855F7" title="4 colores en cuadrado">⬛ Tétrada</button>
+      <button class="pill" data-h="split" style="--pc:#F97316" title="Base + 2 vecinos del opuesto">✌️ Split</button>
     </div>
 
     <!-- History -->
@@ -271,11 +359,11 @@ header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.35rem,4vw,1.9rem);
       <div class="sel-row">
         <div class="big-swatch" id="bigSwatch"></div>
         <div class="sel-info">
-          <div class="sel-label">Tu color</div>
+          <div class="sel-label">✨ Tu color</div>
           <div class="sel-name" id="colorName">Rojo</div>
           <div class="temp-badge" id="tempBadge">🔥 Cálido</div><br>
           <button class="hex-tag" id="hexTag" onclick="copyCurrentHex()">#FF0000</button>
-          <div class="hex-hint">👆 toca para copiar</div>
+          <div class="copy-hint">👆 toca para copiar el HEX</div>
         </div>
       </div>
     </div>
@@ -283,10 +371,11 @@ header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.35rem,4vw,1.9rem);
     <!-- Tabs -->
     <div class="card">
       <div class="tabs" id="tabsEl">
-        <button class="tab active" data-tab="palette">🎭 Paleta</button>
+        <button class="tab active" data-tab="palette">🎨 Paleta</button>
         <button class="tab" data-tab="values">📐 Valores</button>
-        <button class="tab" data-tab="psych">🧠 Psicología</button>
+        <button class="tab" data-tab="psych">🧠 Psico</button>
         <button class="tab" data-tab="variants">🌈 Variantes</button>
+        <button class="tab" data-tab="tips">🖌️ Consejos</button>
       </div>
       <div class="tab-content" id="tabContent"></div>
     </div>
@@ -474,8 +563,14 @@ const ctx=canvas.getContext('2d');
 let SIZE,CX,CY,OUTER,RING_W,INNER,MARK_R;
 
 function setSize(){
-  SIZE=Math.min(window.innerWidth-46,360);
-  canvas.width=canvas.height=SIZE;
+  const w=window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth||360;
+  SIZE=Math.max(240,Math.min(w-40,360));
+  canvas.setAttribute('width',SIZE);
+  canvas.setAttribute('height',SIZE);
+  canvas.style.width=SIZE+'px';
+  canvas.style.height=SIZE+'px';
+  const wrap=document.getElementById('canvasWrap');
+  if(wrap){wrap.style.width=SIZE+'px';wrap.style.height=SIZE+'px';}
   CX=CY=SIZE/2;OUTER=SIZE/2-6;RING_W=OUTER*.25;INNER=OUTER-RING_W;MARK_R=INNER+RING_W/2;
 }
 
@@ -609,6 +704,7 @@ function renderTab(tab){
   else if(tab==='values')el.innerHTML=buildValues();
   else if(tab==='psych')el.innerHTML=buildPsych();
   else if(tab==='variants')el.innerHTML=buildVariants();
+  else if(tab==='tips'){el.innerHTML=buildTips();bindTipsEv();return;}
   bindTabEv(tab);
 }
 
@@ -633,9 +729,9 @@ function buildPalette(){
     <div class="harm-desc-text">${H.desc}</div>
   </div>
   <div class="export-row">
-    <button class="exp-btn" id="expPNG">🖼️ PNG</button>
-    <button class="exp-btn" id="expCSS">⚙️ CSS</button>
-    <button class="exp-btn" id="expJSON">📦 JSON</button>
+    <button class="exp-btn" id="expPNG" data-tip="Descargar imagen PNG">🖼️ PNG</button>
+    <button class="exp-btn" id="expCSS" data-tip="Copiar variables CSS">⚙️ CSS vars</button>
+    <button class="exp-btn" id="expJSON" data-tip="Copiar JSON de colores">📦 JSON</button>
   </div>`;
   return html;
 }
@@ -750,943 +846,152 @@ function buildVariants(){
   return html;
 }
 
-function bindTabEv(tab){
-  document.querySelectorAll('[data-copy]').forEach(el=>el.addEventListener('click',()=>copyText(el.dataset.copy)));
-  if(tab==='palette'){
-    document.querySelectorAll('.sw[data-h]').forEach(el=>{
-      el.addEventListener('click',e=>{
-        if(e.target.closest('.sw-copy'))return;
-        S.hue=parseInt(el.dataset.h);S.sat=parseInt(el.dataset.s);S.val=parseInt(el.dataset.v);
-        addHistory(S.hue,S.sat,S.val);playTone(hueToFreq(S.hue));update();drawWheel();
-      });
-    });
-    document.getElementById('expPNG')?.addEventListener('click',exportPNG);
-    document.getElementById('expCSS')?.addEventListener('click',exportCSS);
-    document.getElementById('expJSON')?.addEventListener('click',exportJSON);
-  }
-}
-
-// ═══════════════════════════════════════════════
-// HISTORY
-// ═══════════════════════════════════════════════
-function renderHistory(){
-  const bar=document.getElementById('histBar');bar.innerHTML='';
-  S.history.forEach((c,i)=>{
-    const d=document.createElement('div');
-    d.className='hist-dot'+(i===0?' current':'');d.style.background=c.hex;d.title=c.hex;
-    d.addEventListener('click',()=>{S.hue=c.h;S.sat=c.s;S.val=c.v;playTone(hueToFreq(c.h));update();drawWheel();});
-    bar.appendChild(d);
-  });
-}
-
-// ═══════════════════════════════════════════════
-// QUIZ
-// ═══════════════════════════════════════════════
-function openQuiz(){
-  S.quizQ=0;S.quizScore=0;S.quizAnswered=false;S.quizDone=false;
-  document.getElementById('quizModal').classList.add('open');
-  renderQuiz();
-}
-function closeQuiz(){document.getElementById('quizModal').classList.remove('open')}
-
-function renderQuiz(){
-  const box=document.getElementById('quizBox');
-  box.innerHTML=`<button class="m-close" onclick="closeQuiz()">✕</button>`;
-  if(S.quizDone){
-    const pct=Math.round(S.quizScore/QUIZ.length*100);
-    const[em,msg]=pct>=80?['🏆','¡Eres un experto del color! Increíble.']:pct>=50?['🌟','¡Muy bien! Estás aprendiendo rápido.']:['📚','¡Sigue practicando! Ya casi lo tienes.'];
-    box.innerHTML+=`<div class="qz-result"><span class="qz-emoji">${em}</span>
-      <div class="qz-rtitle">${S.quizScore}/${QUIZ.length} correctas</div>
-      <div class="qz-rsub">${msg}<br>${pct}% de aciertos</div>
-      <button class="qz-restart" onclick="openQuiz()">🔄 Jugar de nuevo</button></div>`;
-    return;
-  }
-  const q=QUIZ[S.quizQ];const prog=S.quizQ/QUIZ.length*100;
-  let optsHtml='<div class="qz-opts">';
-  if(q.type==='color'){
-    q.opts.forEach((c,i)=>optsHtml+=`<div class="qz-copt" style="background:${hsvToHex(c.h,c.s,c.v)}" data-idx="${i}" title="${getColorName(c.h)}"></div>`);
-  }else{
-    q.opts.forEach((opt,i)=>optsHtml+=`<button class="qz-opt" data-idx="${i}">${opt}</button>`);
-  }
-  optsHtml+='</div>';
-  box.innerHTML+=`<div class="qz-head"><div class="qz-title">🎯 Quiz de Colores</div>
-    <div class="qz-score">Pregunta ${S.quizQ+1}/${QUIZ.length} · ⭐ ${S.quizScore}</div></div>
-    <div class="qz-bar"><div class="qz-bar-fill" style="width:${prog}%"></div></div>
-    <div class="qz-q">${q.q}</div>${optsHtml}<div id="qzFb"></div>`;
-  box.querySelectorAll('[data-idx]').forEach(el=>{
-    el.addEventListener('click',()=>{
-      if(S.quizAnswered)return;S.quizAnswered=true;
-      const chosen=parseInt(el.dataset.idx),correct=chosen===q.correct;
-      if(correct)S.quizScore++;
-      box.querySelectorAll('[data-idx]').forEach(opt=>{
-        const idx=parseInt(opt.dataset.idx);
-        if(idx===q.correct)opt.classList.add('correct');
-        else if(idx===chosen)opt.classList.add('wrong');
-        opt.style.pointerEvents='none';
-      });
-      const fb=document.getElementById('qzFb');
-      fb.innerHTML=`<div class="qz-fb ${correct?'win':'lose'}">${correct?'✅':'❌'} ${q.exp}</div>`;
-      playTone(correct?880:200,.22);
-      const btn=document.createElement('button');btn.className='qz-next';
-      btn.textContent=S.quizQ<QUIZ.length-1?'➡️ Siguiente':'🏁 Ver resultado';
-      btn.addEventListener('click',()=>{S.quizQ++;S.quizAnswered=false;if(S.quizQ>=QUIZ.length)S.quizDone=true;renderQuiz();});
-      fb.appendChild(btn);
-    });
-  });
-}
-
-// ═══════════════════════════════════════════════
-// EXPORT
-// ═══════════════════════════════════════════════
-function exportPNG(){
-  const colors=paletteColors(),H=HARMONIES[S.harmony];
-  const cw=160,ch=80,pad=20,gap=12;
-  const W=pad*2+colors.length*(cw+gap)-gap,HH=140;
-  const ec=document.createElement('canvas');ec.width=W;ec.height=HH;
-  const ec2=ec.getContext('2d');
-  ec2.fillStyle=S.dark?'#1A1A2E':'#F5F2EE';ec2.fillRect(0,0,W,HH);
-  ec2.fillStyle=S.dark?'#FFFFFF':'#222222';ec2.font='bold 16px Arial,sans-serif';
-  ec2.textAlign='center';ec2.fillText(`Paleta ${H.name} ${H.emoji}`,W/2,28);
-  colors.forEach((c,i)=>{
-    const x=pad+i*(cw+gap),y=38;
-    ec2.fillStyle=c.hex;
-    if(ec2.roundRect){ec2.beginPath();ec2.roundRect(x,y,cw,ch,10);ec2.fill();}
-    else{ec2.fillRect(x,y,cw,ch);}
-    ec2.fillStyle=S.dark?'#CCCCCC':'#555';ec2.font='700 11px Courier New,monospace';
-    ec2.textAlign='center';ec2.fillText(c.hex,x+cw/2,y+ch+18);
-    ec2.font='700 10px Arial,sans-serif';ec2.fillText(getColorName(c.h),x+cw/2,y+ch+32);
-  });
-  const a=document.createElement('a');a.download=`paleta-${H.name.toLowerCase()}.png`;a.href=ec.toDataURL('image/png');a.click();
-  showToast('🖼️ ¡Imagen descargada!');
-}
-
-function exportCSS(){
-  const colors=paletteColors(),H=HARMONIES[S.harmony];
-  let css=`/* Paleta ${H.name} – Rueda de Color Mágica */\n:root {\n`;
-  colors.forEach((c,i)=>{
-    const slug=(H.roles[i]||`color-${i+1}`).toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-');
-    const[r,g,b]=hsvToRgb(c.h,c.s,c.v);const[hh,sl,l]=hsvToHsl(c.h,c.s,c.v);
-    css+=`  --${slug}: ${c.hex};\n  --${slug}-rgb: ${r}, ${g}, ${b};\n  --${slug}-hsl: ${hh}deg ${sl}% ${l}%;\n`;
-  });
-  css+='}\n\n/* Ejemplo: color: var(--base); background: rgb(var(--base-rgb) / 0.5); */';
-  navigator.clipboard.writeText(css).catch(()=>{});showToast('⚙️ ¡Variables CSS copiadas!');
-}
-
-function exportJSON(){
-  const colors=paletteColors(),H=HARMONIES[S.harmony];
-  const data={harmony:H.name,emoji:H.emoji,
-    colors:colors.map((c,i)=>{const[r,g,b]=hsvToRgb(c.h,c.s,c.v);const[hh,sl,l]=hsvToHsl(c.h,c.s,c.v);
-      return{role:H.roles[i]||`Color ${i+1}`,name:getColorName(c.h),hex:c.hex,
-        rgb:{r,g,b},hsl:{h:hh,s:sl,l},hsv:{h:c.h,s:c.s,v:c.v}}})};
-  navigator.clipboard.writeText(JSON.stringify(data,null,2)).catch(()=>{});showToast('📦 ¡JSON copiado!');
-}
-
-// ═══════════════════════════════════════════════
-// SHARE
-// ═══════════════════════════════════════════════
-function getShareURL(){
-  const url=new URL(window.location.href.split('#')[0]);
-  url.hash=`${S.hue},${S.sat},${S.val},${S.harmony}`;return url.toString();
-}
-function openShare(){
-  const colors=paletteColors(),url=getShareURL();
-  document.getElementById('shUrl').value=url;
-  document.getElementById('shPrev').innerHTML=colors.map(c=>`<div class="sh-dot" style="background:${c.hex}"></div>`).join('');
-  document.getElementById('shareModal').classList.add('open');
-}
-function closeShare(){document.getElementById('shareModal').classList.remove('open')}
-function copyShareURL(){copyText(getShareURL())}
-
-// ═══════════════════════════════════════════════
-// UTILS
-// ═══════════════════════════════════════════════
-function copyCurrentHex(){copyText(hsvToHex(S.hue,S.sat,S.val))}
-function copyText(text){
-  navigator.clipboard.writeText(text).catch(()=>{});
-  showToast(`✅ ${text.length>35?text.slice(0,33)+'…':text}`);
-}
-function showToast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),2400);
-}
-
-// ═══════════════════════════════════════════════
-// DARK MODE
-// ═══════════════════════════════════════════════
-function toggleDark(){
-  S.dark=!S.dark;
-  document.documentElement.setAttribute('data-theme',S.dark?'dark':'light');
-  const btn=document.getElementById('darkBtn');
-  btn.textContent=S.dark?'☀️':'🌙';btn.classList.toggle('on',S.dark);
-  drawWheel();renderTab(S.activeTab);
-}
-
-// ═══════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════
-
-// Pills
-document.querySelectorAll('.pill').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.pill').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');S.harmony=btn.dataset.h;
-    playTone(hueToFreq(S.hue));drawWheel();update();
-  });
-});
-
-// Tabs
-document.querySelectorAll('.tab').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');S.activeTab=btn.dataset.tab;renderTab(S.activeTab);
-  });
-});
-
-// Header buttons
-document.getElementById('darkBtn').addEventListener('click',toggleDark);
-document.getElementById('soundBtn').addEventListener('click',()=>{
-  soundOn=!soundOn;const btn=document.getElementById('soundBtn');
-  btn.textContent=soundOn?'🔊':'🔇';btn.classList.toggle('on',!soundOn);
-});
-document.getElementById('shareBtn').addEventListener('click',openShare);
-
-// Load from hash
-const hash=window.location.hash.slice(1);
-if(hash){
-  const p=hash.split(',');
-  if(p.length>=3){
-    S.hue=Math.max(0,Math.min(359,parseInt(p[0])||0));
-    S.sat=Math.max(0,Math.min(100,parseInt(p[1])||100));
-    S.val=Math.max(0,Math.min(100,parseInt(p[2])||100));
-    if(p[3]&&HARMONIES[p[3]]){
-      S.harmony=p[3];
-      document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('active',b.dataset.h===S.harmony));
-    }
-  }
-}
-
-window.addEventListener('resize',()=>{setSize();drawWheel()});
-
-setSize();
-addHistory(S.hue,S.sat,S.val);
-update();
-drawWheel();
-</script>
-</body>
-</html>
-.icon-btn.on{background:#222;color:#fff;border-color:#222}
-
-/* ── LAYOUT ── */
-.layout{max-width:880px;margin:0 auto;padding:22px 18px 70px;display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap;justify-content:center}
-
-/* ── WHEEL COL ── */
-.wheel-col{display:flex;flex-direction:column;align-items:center;gap:16px}
-.wheel-wrap{position:relative;line-height:0}
-#wheelCanvas{cursor:crosshair;touch-action:none;display:block;filter:drop-shadow(0 12px 32px rgba(0,0,0,.22));border-radius:50%}
-.hover-tip{position:absolute;width:26px;height:26px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 2px rgba(0,0,0,.2),0 4px 14px rgba(0,0,0,.3);pointer-events:none;transform:translate(-50%,-50%);display:none;z-index:10}
-
-/* ── PILLS ── */
-.harmony-pills{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:390px}
-.pill{display:flex;align-items:center;gap:5px;padding:8px 13px;border-radius:50px;border:2px solid var(--border);background:var(--card);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.82rem;color:var(--text2);transition:all .22s cubic-bezier(.34,1.56,.64,1);user-select:none;white-space:nowrap}
-.pill:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-.pill.active{background:var(--pc,#FF5757);border-color:var(--pc,#FF5757);color:#fff;transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.2)}
-
-/* ── HISTORY ── */
-.history-section{width:100%;max-width:390px}
-.section-label{font-size:.72rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.history-bar{display:flex;gap:6px;flex-wrap:wrap}
-.hist-dot{width:34px;height:34px;border-radius:9px;cursor:pointer;border:2.5px solid transparent;transition:all .2s cubic-bezier(.34,1.56,.64,1);box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.hist-dot:hover{transform:scale(1.22) translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.22)}
-.hist-dot.current{border-color:white;box-shadow:0 0 0 3px rgba(0,0,0,.2),0 4px 12px rgba(0,0,0,.2)}
-
-/* ── INFO COL ── */
-.info-col{flex:1;min-width:260px;max-width:410px;display:flex;flex-direction:column;gap:13px}
-
-/* ── CARD ── */
-.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden;transition:background .35s,border-color .35s}
-
-/* ── SELECTED ── */
-.sel-card{padding:17px 18px}
-.sel-row{display:flex;align-items:center;gap:15px}
-.big-swatch{width:78px;height:78px;border-radius:18px;flex-shrink:0;box-shadow:0 8px 24px rgba(0,0,0,.22);transition:background .25s;position:relative;overflow:hidden}
-.big-swatch::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.28),transparent 60%)}
-.sel-info{flex:1}
-.sel-label{font-weight:800;font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
-.sel-name{font-family:'Fredoka One',cursive;font-size:1.35rem;line-height:1.15;margin:3px 0 5px;transition:color .25s}
-.temp-badge{display:inline-block;padding:3px 10px;border-radius:50px;font-size:.72rem;font-weight:800;margin-bottom:6px;transition:background .25s,color .25s}
-.hex-tag{display:inline-block;padding:6px 14px;border-radius:10px;font-family:'Courier New',monospace;font-weight:700;font-size:.88rem;cursor:pointer;border:none;transition:opacity .15s,transform .15s}
-.hex-tag:hover{opacity:.85;transform:scale(.97)}
-.hex-tag:active{transform:scale(.9)}
-.hex-hint{font-size:.65rem;color:var(--text3);font-weight:700;margin-top:3px}
-
-/* ── TABS ── */
-.tabs{display:flex;background:var(--tab-bg);overflow-x:auto;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{flex:1;min-width:0;white-space:nowrap;padding:11px 6px;border:none;background:transparent;cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.77rem;color:var(--text3);transition:all .2s;border-bottom:3px solid transparent}
-.tab:hover{color:var(--text)}
-.tab.active{color:var(--text);border-bottom-color:var(--acc);background:var(--card)}
-.tab-content{padding:17px}
-
-/* ── PALETTE TAB ── */
-.swatches{display:flex;flex-direction:column;gap:8px}
-.sw{display:flex;align-items:center;gap:11px;padding:9px 11px;background:var(--card2);border-radius:13px;border:1.5px solid var(--border);cursor:pointer;transition:all .2s}
-.sw:hover{transform:translateX(5px);box-shadow:var(--shadow)}
-.sw.base{border-color:var(--acc)}
-.sw-dot{width:42px;height:42px;border-radius:11px;flex-shrink:0;box-shadow:0 3px 10px rgba(0,0,0,.15);position:relative;overflow:hidden}
-.sw-dot::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2),transparent)}
-.sw-text{flex:1;min-width:0}
-.sw-role{font-weight:800;font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.4px}
-.sw-name{font-weight:800;font-size:.9rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sw-hex{font-family:'Courier New',monospace;font-size:.76rem;color:var(--text3)}
-.sw-copy{flex-shrink:0;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:5px 9px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.73rem;cursor:pointer;color:var(--text2);transition:all .15s}
-.sw-copy:hover{background:var(--bg2)}
-.sw-copy:active{transform:scale(.88)}
-
-.harm-desc{margin-top:13px;padding:13px 15px;background:var(--card2);border-radius:13px;border:1px solid var(--border)}
-.harm-desc-title{font-family:'Fredoka One',cursive;font-size:.98rem;color:var(--text);margin-bottom:5px}
-.harm-desc-text{font-size:.84rem;font-weight:600;color:var(--text2);line-height:1.55}
-
-.export-row{display:flex;gap:7px;margin-top:13px}
-.exp-btn{flex:1;padding:10px 6px;border-radius:12px;border:1.5px solid var(--border);background:var(--input-bg);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.78rem;color:var(--text);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:4px}
-.exp-btn:hover{background:var(--bg2);transform:translateY(-2px);box-shadow:var(--shadow)}
-.exp-btn:active{transform:scale(.95)}
-
-/* ── VALUES TAB ── */
-.vals-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.val-box{padding:12px 13px;background:var(--card2);border-radius:13px;border:1.5px solid var(--border);cursor:pointer;transition:all .2s}
-.val-box:hover{background:var(--bg2);transform:scale(1.02)}
-.val-box:active{transform:scale(.96)}
-.val-type{font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--text3)}
-.val-val{font-family:'Courier New',monospace;font-weight:700;font-size:.88rem;color:var(--text);word-break:break-all;margin-top:4px;line-height:1.4}
-
-.wcag-wrap{margin-top:15px}
-.wcag-rows{display:flex;flex-direction:column;gap:6px;margin-top:8px}
-.wcag-row{display:flex;align-items:center;gap:9px;padding:8px 11px;background:var(--card2);border-radius:12px;border:1px solid var(--border)}
-.wcag-dots{display:flex;gap:4px}
-.wcag-dot{width:20px;height:20px;border-radius:5px}
-.wcag-info{flex:1;font-size:.78rem;font-weight:700;color:var(--text2)}
-.wcag-right{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
-.wcag-ratio{font-family:'Courier New',monospace;font-weight:700;font-size:.78rem;color:var(--text)}
-.bpass{background:#DCFCE7;color:#16A34A;padding:2px 7px;border-radius:6px;font-size:.68rem;font-weight:800}
-.bfail{background:#FEE2E2;color:#DC2626;padding:2px 7px;border-radius:6px;font-size:.68rem;font-weight:800}
-[data-theme="dark"] .bpass{background:#14532D;color:#4ADE80}
-[data-theme="dark"] .bfail{background:#7F1D1D;color:#FCA5A5}
-
-/* ── PSYCH TAB ── */
-.psych-block{background:var(--card2);border-radius:14px;padding:14px 16px;margin-bottom:12px;border:1px solid var(--border)}
-.psych-title{font-family:'Fredoka One',cursive;font-size:1rem;color:var(--text);margin-bottom:5px}
-.psych-text{font-size:.85rem;font-weight:600;color:var(--text2);line-height:1.55}
-.temp-big{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:12px;font-weight:800;font-size:.92rem;margin-bottom:13px;transition:background .3s,color .3s}
-.mockup-row{display:flex;gap:9px;margin-top:3px}
-.mockup-box{flex:1;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border)}
-.mockup-box svg{width:100%;height:auto;display:block}
-
-/* ── VARIANTS TAB ── */
-.var-section{margin-bottom:15px}
-.var-strip{display:flex;gap:4px;margin-top:8px}
-.var-sw{flex:1;height:46px;border-radius:9px;cursor:pointer;position:relative;transition:transform .2s;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.var-sw:hover{transform:translateY(-5px) scale(1.06)}
-.var-sw:active{transform:scale(.94)}
-.var-pct{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:.58rem;font-weight:800;white-space:nowrap}
-
-/* ── QUIZ FAB ── */
-.quiz-fab{position:fixed;bottom:24px;right:22px;background:linear-gradient(135deg,#FF5757,#FF8C42);color:#fff;border:none;padding:13px 20px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:900;font-size:.9rem;cursor:pointer;box-shadow:0 8px 26px rgba(255,87,87,.5);z-index:50;transition:all .25s cubic-bezier(.34,1.56,.64,1);display:flex;align-items:center;gap:7px}
-.quiz-fab:hover{transform:scale(1.1) translateY(-3px);box-shadow:0 14px 34px rgba(255,87,87,.5)}
-.quiz-fab:active{transform:scale(.95)}
-
-/* ── MODAL ── */
-.modal{position:fixed;inset:0;z-index:500;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;pointer-events:none;transition:opacity .25s}
-.modal.open{opacity:1;pointer-events:all}
-.m-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(5px)}
-.m-box{position:relative;background:var(--card);border-radius:24px;padding:26px;max-width:440px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg);border:1px solid var(--border);transform:scale(.9) translateY(22px);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
-.modal.open .m-box{transform:scale(1) translateY(0)}
-.m-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:none;background:var(--input-bg);cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;color:var(--text2);transition:background .2s}
-.m-close:hover{background:var(--bg2)}
-
-/* ── QUIZ ── */
-.qz-head{text-align:center;margin-bottom:20px}
-.qz-title{font-family:'Fredoka One',cursive;font-size:1.75rem;color:var(--text)}
-.qz-score{font-weight:800;font-size:.87rem;color:var(--text3);margin-top:3px}
-.qz-bar{height:8px;background:var(--input-bg);border-radius:100px;margin-bottom:22px;overflow:hidden}
-.qz-bar-fill{height:100%;background:linear-gradient(90deg,#FF5757,#FFBD3E);border-radius:100px;transition:width .4s}
-.qz-q{font-family:'Fredoka One',cursive;font-size:1.18rem;color:var(--text);margin-bottom:18px;text-align:center;line-height:1.35}
-.qz-opts{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.qz-opt{padding:13px 10px;border-radius:13px;border:2px solid var(--border);background:var(--card2);cursor:pointer;font-family:'Nunito',sans-serif;font-weight:800;font-size:.86rem;color:var(--text);transition:all .2s;text-align:center;line-height:1.4}
-.qz-opt:hover{border-color:#FFBD3E;background:var(--bg2);transform:scale(1.03)}
-.qz-opt.correct{border-color:#22C55E!important;background:#DCFCE7!important;color:#16A34A!important}
-.qz-opt.wrong{border-color:#EF4444!important;background:#FEE2E2!important;color:#DC2626!important}
-[data-theme="dark"] .qz-opt.correct{background:#14532D!important;color:#4ADE80!important}
-[data-theme="dark"] .qz-opt.wrong{background:#7F1D1D!important;color:#FCA5A5!important}
-.qz-copt{height:58px;border-radius:12px;border:3px solid var(--border);cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.qz-copt:hover{transform:scale(1.06);box-shadow:var(--shadow-lg)}
-.qz-copt::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent)}
-.qz-copt.correct{outline:4px solid #22C55E}
-.qz-copt.wrong{outline:4px solid #EF4444;opacity:.6}
-.qz-fb{text-align:center;padding:13px 10px;font-family:'Fredoka One',cursive;font-size:1.15rem;border-radius:12px;margin-top:4px}
-.qz-fb.win{color:#16A34A;background:#DCFCE7}
-.qz-fb.lose{color:#DC2626;background:#FEE2E2}
-[data-theme="dark"] .qz-fb.win{background:#14532D;color:#4ADE80}
-[data-theme="dark"] .qz-fb.lose{background:#7F1D1D;color:#FCA5A5}
-.qz-next{display:block;width:100%;margin-top:13px;padding:13px;border-radius:13px;border:none;background:linear-gradient(135deg,#FF5757,#FF8C42);color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:.97rem;cursor:pointer;transition:all .2s}
-.qz-next:hover{transform:scale(1.02);box-shadow:0 8px 22px rgba(255,87,87,.4)}
-.qz-result{text-align:center;padding:10px 0}
-.qz-emoji{font-size:4rem;display:block;margin-bottom:10px}
-.qz-rtitle{font-family:'Fredoka One',cursive;font-size:1.75rem;color:var(--text);margin-bottom:7px}
-.qz-rsub{font-weight:700;font-size:.93rem;color:var(--text2);margin-bottom:20px;line-height:1.5}
-.qz-restart{padding:13px 32px;border-radius:13px;border:none;background:linear-gradient(135deg,#FF5757,#FF8C42);color:#fff;font-family:'Nunito',sans-serif;font-weight:900;font-size:.97rem;cursor:pointer;transition:all .2s}
-.qz-restart:hover{transform:scale(1.05);box-shadow:0 8px 22px rgba(255,87,87,.4)}
-
-/* ── SHARE MODAL ── */
-.sh-title{font-family:'Fredoka One',cursive;font-size:1.5rem;color:var(--text);margin-bottom:5px}
-.sh-sub{font-size:.86rem;font-weight:600;color:var(--text2);margin-bottom:18px}
-.sh-prev{border-radius:13px;padding:13px;display:flex;gap:8px;background:var(--card2);margin-bottom:13px;border:1px solid var(--border)}
-.sh-dot{height:38px;border-radius:9px;flex:1;box-shadow:0 2px 8px rgba(0,0,0,.15)}
-.sh-url-row{display:flex;gap:8px;margin-bottom:12px}
-.sh-url{flex:1;padding:11px 13px;border-radius:11px;border:1.5px solid var(--border);background:var(--input-bg);font-family:'Courier New',monospace;font-size:.76rem;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sh-copy{padding:11px 16px;border-radius:11px;border:none;background:var(--acc);color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:.82rem;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
-.sh-copy:hover{opacity:.85;transform:scale(1.04)}
-
-/* ── TOAST ── */
-#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1A1A1A;color:#fff;padding:12px 24px;border-radius:100px;font-weight:800;font-size:.88rem;z-index:999;pointer-events:none;white-space:nowrap;transition:transform .35s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 24px rgba(0,0,0,.35)}
-#toast.show{transform:translateX(-50%) translateY(0)}
-
-/* ── RESPONSIVE ── */
-@media(max-width:620px){
-  .layout{padding:14px 12px 80px;gap:14px}
-  .info-col{min-width:0;width:100%;max-width:100%}
-  .quiz-fab{bottom:14px;right:14px;padding:11px 16px;font-size:.84rem}
-  header{padding:12px 14px}
-}
-</style>
-</head>
-<body>
-
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <div>
-      <h1>🎨 Rueda de Color Mágica</h1>
-      <p class="tagline">Toca, explora y crea paletas increíbles ✨</p>
-    </div>
-    <div class="header-btns">
-      <button class="icon-btn" id="soundBtn" title="Sonido">🔊</button>
-      <button class="icon-btn" id="shareBtn" title="Compartir paleta">🔗</button>
-      <button class="icon-btn" id="darkBtn" title="Modo oscuro">🌙</button>
-    </div>
-  </div>
-</header>
-
-<!-- MAIN -->
-<div class="layout">
-
-  <!-- WHEEL COLUMN -->
-  <div class="wheel-col">
-    <div class="wheel-wrap">
-      <canvas id="wheelCanvas"></canvas>
-      <div class="hover-tip" id="hoverTip"></div>
-    </div>
-
-    <!-- Pills -->
-    <div class="harmony-pills" id="pillsWrap">
-      <button class="pill active" data-h="complementario" style="--pc:#FF5757">⚡ Complementario</button>
-      <button class="pill" data-h="analogo" style="--pc:#3ECFB2">🌊 Análogo</button>
-      <button class="pill" data-h="triada" style="--pc:#FFBD3E">🔺 Tríada</button>
-      <button class="pill" data-h="tetrada" style="--pc:#A855F7">⬛ Tétrada</button>
-      <button class="pill" data-h="split" style="--pc:#F97316">✌️ Split</button>
-    </div>
-
-    <!-- History -->
-    <div class="history-section">
-      <div class="section-label">🕐 Historial de colores</div>
-      <div class="history-bar" id="histBar"></div>
-    </div>
-  </div>
-
-  <!-- INFO COLUMN -->
-  <div class="info-col">
-
-    <!-- Selected color card -->
-    <div class="card sel-card">
-      <div class="sel-row">
-        <div class="big-swatch" id="bigSwatch"></div>
-        <div class="sel-info">
-          <div class="sel-label">Tu color</div>
-          <div class="sel-name" id="colorName">Rojo</div>
-          <div class="temp-badge" id="tempBadge">🔥 Cálido</div><br>
-          <button class="hex-tag" id="hexTag" onclick="copyCurrentHex()">#FF0000</button>
-          <div class="hex-hint">👆 toca para copiar</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tabs -->
-    <div class="card">
-      <div class="tabs" id="tabsEl">
-        <button class="tab active" data-tab="palette">🎭 Paleta</button>
-        <button class="tab" data-tab="values">📐 Valores</button>
-        <button class="tab" data-tab="psych">🧠 Psicología</button>
-        <button class="tab" data-tab="variants">🌈 Variantes</button>
-      </div>
-      <div class="tab-content" id="tabContent"></div>
-    </div>
-
-  </div>
-</div>
-
-<!-- QUIZ FAB -->
-<button class="quiz-fab" onclick="openQuiz()">🎯 Quiz</button>
-
-<!-- QUIZ MODAL -->
-<div class="modal" id="quizModal">
-  <div class="m-backdrop" onclick="closeQuiz()"></div>
-  <div class="m-box" id="quizBox"></div>
-</div>
-
-<!-- SHARE MODAL -->
-<div class="modal" id="shareModal">
-  <div class="m-backdrop" onclick="closeShare()"></div>
-  <div class="m-box">
-    <button class="m-close" onclick="closeShare()">✕</button>
-    <div class="sh-title">🔗 Compartir Paleta</div>
-    <div class="sh-sub">Comparte este link y cualquier persona verá tu combinación exacta</div>
-    <div class="sh-prev" id="shPrev"></div>
-    <div class="sh-url-row">
-      <input class="sh-url" id="shUrl" readonly>
-      <button class="sh-copy" onclick="copyShareURL()">Copiar</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
-<div id="toast"></div>
-
-<script>
-// ═══════════════════════════════════════════════
-// CONSTANTS
-// ═══════════════════════════════════════════════
-const HARMONIES = {
-  complementario:{name:'Complementario',emoji:'⚡',pc:'#FF5757',offsets:[180],roles:['Base','Complemento'],desc:'Dos colores opuestos en la rueda. ¡Se hacen brillar uno al otro! Como el azul del cielo y el naranja del atardecer.'},
-  analogo:{name:'Análogo',emoji:'🌊',pc:'#3ECFB2',offsets:[-30,30],roles:['Base','Análogo −30°','Análogo +30°'],desc:'Colores vecinos en la rueda, como buenos amigos. Crean armonías suaves, tranquilas y naturales. ¡Muy elegante!'},
-  triada:{name:'Tríada',emoji:'🔺',pc:'#FFBD3E',offsets:[120,240],roles:['Base','Tríada 2','Tríada 3'],desc:'Tres colores separados exactamente igual, como un triángulo. ¡Muy colorido y alegre, como un arcoíris!'},
-  tetrada:{name:'Tétrada',emoji:'⬛',pc:'#A855F7',offsets:[90,180,270],roles:['Base','Tétrada 2','Tétrada 3','Tétrada 4'],desc:'Cuatro colores formando un cuadrado en la rueda. ¡Máxima variedad de colores! Perfecto para diseños súper vivos.'},
-  split:{name:'Split Comp.',emoji:'✌️',pc:'#F97316',offsets:[150,210],roles:['Base','Split 1','Split 2'],desc:'Tu color más dos vecinos del opuesto. Más variado que el complementario pero igual de poderoso. ¡Lo mejor de dos mundos!'}
+// ── TIPS ──
+const TIPS_DATA = {
+  complementario:{
+    sections:[
+      {icon:'💡',title:'Luz y Sombra de Impacto',sub:'El uso más clásico en ilustración',
+       rows:[
+         {icon:'☀️',title:'Luz cálida + sombra fría',desc:'Si tu luz es naranja/amarilla (como el sol), pon sombras azules/violetas. Si tu luz es fría (luna, pantalla), pon sombras cálidas. Este contraste hace la iluminación súper convincente.',example:'Luz dorada → sombra azul-morada'},
+         {icon:'🌅',title:'Cielos al atardecer',desc:'El cielo naranja-rojo contrasta con el suelo o siluetas en azul. Es la naturaleza usando complementarios automáticamente.',example:'Naranja cielo + azul mar/tierra'},
+         {icon:'👁️',title:'Punto focal irresistible',desc:'Pon el color complementario justo donde quieres que el ojo del espectador vaya primero. Funciona como un imán visual.',example:'Personaje rojo en fondo verde'},
+       ]},
+      {icon:'🎭',title:'Contraste y Drama',sub:'Para composiciones con tensión visual',
+       rows:[
+         {icon:'⚡',title:'Vibración cromática',desc:'Cuando dos complementarios se tocan en el borde, el ojo "vibra" y se siente tensión. Úsalo para energía, peligro o electricidad.',example:'Borde rojo-cian en escenas de acción'},
+         {icon:'🦸',title:'Héroe vs Villano',desc:'Colorea al héroe y al villano con complementarios. El contraste refuerza su oposición sin necesidad de palabras.',example:'Héroe azul + villano naranja (Spider-Man vs. Vulture)'},
+         {icon:'🎯',title:'Fondo que no compite',desc:'Desatura el complementario del fondo para que el personaje principal brille sin perder la armonía.',example:'Personaje rojo + fondo verde grisáceo'},
+       ]},
+    ]},
+  analogo:{
+    sections:[
+      {icon:'🌫️',title:'Sombreado Natural',sub:'El secreto del sombreado suave profesional',
+       rows:[
+         {icon:'🎨',title:'Sombras sin grises',desc:'En vez de agregar negro o gris para sombrear, mueve el tono hacia el vecino más frío/oscuro de la rueda. Las sombras se ven vivas y naturales, no sucias.',example:'Piel amarilla → sombra naranja → sombra roja'},
+         {icon:'✨',title:'Luz de relleno',desc:'La luz de relleno (luz secundaria que ilumina sombras) puede ser el color análogo del lado contrario. Da profundidad sin romper la armonía.',example:'Luz principal amarilla + relleno verde limón'},
+         {icon:'🌊',title:'Transiciones de piel',desc:'La piel humana va del amarillo-rosa en zonas iluminadas al rojo-naranja en zonas medias y al rojo-violeta en sombras profundas. Son análogos.',example:'Amarillo → naranja → rojo-marrón → violeta'},
+       ]},
+      {icon:'🏞️',title:'Atmósfera y Ambientes',sub:'Para crear sensaciones de lugar y hora',
+       rows:[
+         {icon:'🌲',title:'Bosques y naturaleza',desc:'Los verdes análogos (amarillo-verde, verde puro, verde-azul) dan profundidad a la vegetación. Varía la saturación para separar planos.',example:'Primer plano verde brillante → fondo verde-azul apagado'},
+         {icon:'🌅',title:'Golden hour / Blue hour',desc:'La hora dorada vive en los análogos del amarillo-naranja-rojo. La hora azul en cyan-azul-violeta. Usa solo esos análogos para mantener el mood.',example:'Toda la escena en amarillo-naranja-dorado'},
+         {icon:'🌊',title:'Perspectiva atmosférica',desc:'Los objetos lejanos pierden saturación y se vuelven más azulados. Mueve los colores hacia el análogo frío conforme se alejan.',example:'Montaña cercana verde saturado → lejana azul-verde desaturado'},
+       ]},
+    ]},
+  triada:{
+    sections:[
+      {icon:'🎨',title:'Diseño de Personaje',sub:'Para personajes memorables y coloridos',
+       rows:[
+         {icon:'👒',title:'Regla 60-30-10',desc:'Usa un color de la tríada para el 60% del personaje (cuerpo/ropa principal), otro para el 30% (detalles/accesorios) y el tercero para el 10% (acentos pequeños). Equilibrio perfecto.',example:'Rojo 60% + amarillo 30% + azul 10%'},
+         {icon:'🦄',title:'Personajes fantásticos',desc:'La tríada es perfecta para criaturas mágicas, aliens o personajes de videojuego. La diversidad de colores los hace visualmente únicos e icónicos.',example:'Pokémon, personajes de anime'},
+         {icon:'🎪',title:'Escenas festivas o caóticas',desc:'Carnavales, mercados, batallas con magia de colores. La tríada da energía y alegría sin sentirse random.',example:'Escena de mercado medieval colorido'},
+       ]},
+      {icon:'⚖️',title:'Balance Visual',sub:'Cómo no hacer que se vea saturado',
+       rows:[
+         {icon:'🎚️',title:'Un color domina',desc:'Elige uno de los tres como protagonista (más saturado/usado) y usa los otros dos como apoyos. Si los tres compiten igual se ve caótico.',example:'Azul dominante + toques de rojo y amarillo'},
+         {icon:'🌫️',title:'Desatura dos de tres',desc:'Satura mucho solo el color principal. Los otros dos úsalos en versiones más apagadas o claras. El contraste hace que el principal explote.',example:'Rojo saturado + azul grisáceo + amarillo pálido'},
+       ]},
+    ]},
+  tetrada:{
+    sections:[
+      {icon:'🌍',title:'Escenas Complejas',sub:'Para mundos ricos en detalles visuales',
+       rows:[
+         {icon:'🏙️',title:'Fondos elaborados',desc:'Cuando tienes muchos elementos en escena (ciudad, bosque, dungeon) la tétrada permite colorear cada grupo de elementos con un color diferente sin que se vea incoherente.',example:'Ciudad: edificios cálidos + cielo frío + vegetación + luces neón'},
+         {icon:'🎮',title:'Mapas y mundos de juego',desc:'Las zonas de un mapa (hielo, fuego, bosque, desierto) pueden tener cada una un color de la tétrada. Guían al jugador visualmente.',example:'Zona roja + zona azul + zona verde + zona amarilla'},
+         {icon:'👥',title:'Grupos de personajes',desc:'Si tienes 4 personajes de un equipo, dale a cada uno un color de la tétrada. Se identifican rápido y juntos se ven equilibrados.',example:'Los 4 Power Rangers'},
+       ]},
+      {icon:'⚠️',title:'Cómo no arruinarlo',sub:'La tétrada es la más difícil de usar',
+       rows:[
+         {icon:'🚨',title:'Uno manda, tres apoyan',desc:'SIEMPRE elige un color principal que ocupe más del 50% de la escena. Los otros tres son detalles. Si los cuatro compiten en espacio y saturación, la imagen da dolor de cabeza.',example:'Fondo azul 50% + detalles rojo/verde/amarillo'},
+         {icon:'🎚️',title:'Varía el valor (oscuro/claro)',desc:'Aunque tengas cuatro colores distintos, si los pones todos al mismo brillo y saturación se cancelan. Alterna oscuros y claros para crear jerarquía.',example:'Dos colores brillantes + dos apagados'},
+       ]},
+    ]},
+  split:{
+    sections:[
+      {icon:'🎯',title:'Contraste Suavizado',sub:'Más sofisticado que el complementario puro',
+       rows:[
+         {icon:'🧑‍🎨',title:'Personaje sobre fondo',desc:'Pon al personaje en el color base y el fondo en uno de los dos split. El contraste es real pero no agresivo, se ve más refinado que el complementario directo.',example:'Personaje violeta + fondo amarillo-verdoso'},
+         {icon:'🌙',title:'Iluminación de dos fuentes',desc:'Una fuente de luz en cada color split iluminando al personaje desde lados distintos. La diferencia sutil entre los dos split da dimensión sin violencia visual.',example:'Luz izquierda amarillo-verde + luz derecha amarillo-naranja'},
+         {icon:'🎬',title:'Posters y portadas',desc:'Los diseñadores de Hollywood usan split mucho para posters. El protagonista en un color, el fondo en split. Se ve cinematográfico automáticamente.',example:'Naranja protagonista + fondo azul-verde/azul-violeta'},
+       ]},
+      {icon:'💎',title:'Sutileza y Profesionalismo',sub:'Para cuando quieres contraste elegante',
+       rows:[
+         {icon:'👔',title:'Diseño de ropa/moda',desc:'El split permite mezclar colores que contrastan sin chocar. Perfecto para diseñar outfits donde quieres que combinen pero con personalidad.',example:'Camisa azul + pantalón amarillo-verde + zapatos amarillo-naranja'},
+         {icon:'🌺',title:'Flores y naturaleza detallada',desc:'Los pétalos, hojas y tallo pueden llevar el color base y los dos split respectivamente. La naturaleza hace esto constantemente.',example:'Flor roja + hojas verde-amarillo + tallo verde-azulado'},
+       ]},
+    ]},
 };
 
-const COLOR_NAMES=[
-  [0,'Rojo'],[15,'Rojo-Naranja'],[30,'Naranja'],[45,'Naranja-Amarillo'],
-  [60,'Amarillo'],[75,'Amarillo-Verde'],[90,'Lima'],[105,'Verde Lima'],
-  [120,'Verde'],[150,'Verde Esmeralda'],[165,'Verde Agua'],
-  [180,'Cian-Verde'],[195,'Cian'],[210,'Azul Cielo'],[225,'Azul Claro'],
-  [240,'Azul'],[255,'Azul-Violeta'],[270,'Violeta'],[285,'Púrpura'],
-  [300,'Magenta'],[315,'Rosa Intenso'],[330,'Rosa'],[345,'Rosa-Rojo'],[360,'Rojo']
+const TIPS_GLOBAL=[
+  {icon:'🌑',title:'Regla universal de la sombra',text:'Las sombras casi nunca son negras ni grises. Son el color base más oscuro, más saturado y ligeramente desplazado hacia el frío (azul/violeta). Prueba esto y tu arte cambia de nivel inmediatamente.'},
+  {icon:'☀️',title:'Temperatura de luz = temperatura opuesta en sombra',text:'Luz cálida (sol, fuego, lámpara) → sombras frías. Luz fría (luna, noche, LED azul) → sombras cálidas. Esta regla viene de la física real y es lo que hace el arte convincente.'},
+  {icon:'🎯',title:'Menos colores = más impacto',text:'Los artistas profesionales suelen usar 2-3 colores máximo por escena. Cuantos menos colores uses, más poderoso es cada uno. Limítate primero, luego añade.'},
+  {icon:'🔲',title:'El valor (oscuro/claro) es más importante que el color',text:'Si conviertes tu dibujo a blanco y negro y se ve bien, el color también funcionará. El valor da forma y profundidad. El color da emoción. Prioriza el valor.'},
+  {icon:'🌈',title:'Desatura conforme alejás',text:'Los objetos lejanos pierden saturación (perspectiva atmosférica). Un árbol cercano es verde vibrante. Uno lejano es gris-verdoso. Aplica esto y la profundidad aparece sola.'},
+  {icon:'✏️',title:'El color del contorno importa',text:'Los contornos negros en personajes coloridos se ven planos. Prueba contornos del color base pero más oscuro y saturado. O del color complementario oscuro. El personaje cobra vida.'},
 ];
 
-const PSYCH=[
-  {max:15, temp:'cálido',tbg:'#FFE4E1',tc:'#EF4444',emoji:'🔥',icon:'❤️',
-   meaning:'Energía, pasión, amor y urgencia. El rojo acelera el pulso y llama la atención más que cualquier otro color.',
-   brands:'Coca-Cola · YouTube · Netflix · Ferrari'},
-  {max:45, temp:'cálido',tbg:'#FFF0E1',tc:'#F97316',emoji:'🔥',icon:'🧡',
-   meaning:'Creatividad, entusiasmo, diversión y aventura. El naranja es amistoso y da ganas de actuar.',
-   brands:'Amazon · Fanta · Nickelodeon · Harley-Davidson'},
-  {max:75, temp:'cálido',tbg:'#FFFBDE',tc:'#CA8A04',emoji:'🔥',icon:'💛',
-   meaning:'Alegría, optimismo e inteligencia. El amarillo es el más visible del espectro y transmite felicidad instantánea.',
-   brands:'McDonald\'s · IKEA · Snapchat · DHL'},
-  {max:105, temp:'neutro',tbg:'#F0FDE4',tc:'#65A30D',emoji:'🌿',icon:'💚',
-   meaning:'Frescura, crecimiento y energía juvenil. Está en el punto medio entre la energía cálida y la calma fría.',
-   brands:'Sprite · Animal Crossing · 7-Up'},
-  {max:165, temp:'frío',tbg:'#DCFCE7',tc:'#16A34A',emoji:'❄️',icon:'💚',
-   meaning:'Naturaleza, salud, esperanza y dinero. El verde calma el sistema nervioso y da sensación de bienestar.',
-   brands:'Starbucks · Whole Foods · Android · WhatsApp'},
-  {max:210, temp:'frío',tbg:'#CFFAFE',tc:'#0891B2',emoji:'❄️',icon:'🩵',
-   meaning:'Frescura, claridad, tecnología y apertura. El cian evoca el cielo abierto y la transparencia.',
-   brands:'Twitter (antiguo) · Oral-B · AT&T'},
-  {max:255, temp:'frío',tbg:'#DBEAFE',tc:'#2563EB',emoji:'❄️',icon:'💙',
-   meaning:'Confianza, paz, profesionalismo y lealtad. Es el color favorito a nivel mundial y da sensación de seguridad.',
-   brands:'Facebook · Samsung · Ford · BMW · PayPal'},
-  {max:315, temp:'frío',tbg:'#F3E8FF',tc:'#9333EA',emoji:'❄️',icon:'💜',
-   meaning:'Misterio, creatividad, lujo y espiritualidad. El violeta estimula la imaginación y evoca lo extraordinario.',
-   brands:'Cadbury · Hallmark · Twitch · FedEx'},
-  {max:360, temp:'cálido',tbg:'#FCE7F3',tc:'#DB2777',emoji:'🔥',icon:'🩷',
-   meaning:'Amor, fantasía, ternura y romanticismo. El rosa es delicado, memorable y transmite dulzura.',
-   brands:'Barbie · Victoria\'s Secret · T-Mobile · Cosmopolitan'}
-];
-
-const QUIZ=[
-  {q:'¿Cuál es el complementario del 🔴 Rojo?',type:'color',
-   opts:[{h:180,s:100,v:100},{h:120,s:100,v:100},{h:60,s:100,v:100},{h:270,s:100,v:100}],
-   correct:0, exp:'¡El Cian (azul-verde) está exactamente opuesto al rojo! Por eso combinan tan bien.'},
-  {q:'¿Cuántos colores tiene una TRÍADA?',type:'text',
-   opts:['2 colores','3 colores','4 colores','6 colores'],correct:1,
-   exp:'¡La tríada usa 3 colores separados 120° cada uno, formando un triángulo perfecto!'},
-  {q:'¿Qué armonía usa colores VECINOS en la rueda?',type:'text',
-   opts:['Complementario','Tétrada','Análogo','Split'],correct:2,
-   exp:'¡Los colores análogos son vecinos en la rueda y crean combinaciones suaves y naturales!'},
-  {q:'¿Cuál es el complementario del 🔵 Azul?',type:'color',
-   opts:[{h:30,s:100,v:100},{h:60,s:100,v:100},{h:120,s:100,v:100},{h:0,s:100,v:100}],
-   correct:0, exp:'¡El Naranja está opuesto al azul en la rueda! Por eso el azul y naranja se usan tanto juntos.'},
-  {q:'¿Cuántos colores tiene una TÉTRADA?',type:'text',
-   opts:['2 colores','3 colores','4 colores','5 colores'],correct:2,
-   exp:'¡La tétrada tiene 4 colores formando un cuadrado dentro de la rueda de color!'},
-  {q:'¿Cuáles son colores CÁLIDOS?',type:'text',
-   opts:['Azul, verde, violeta','Cian, azul, verde','Rojo, naranja, amarillo','Violeta, azul, cian'],correct:2,
-   exp:'¡Los colores cálidos (rojo, naranja, amarillo) nos recuerdan el fuego y el sol!'},
-  {q:'¿Qué color está OPUESTO al 💛 Amarillo?',type:'color',
-   opts:[{h:240,s:100,v:100},{h:120,s:100,v:100},{h:300,s:100,v:100},{h:180,s:100,v:100}],
-   correct:0, exp:'¡El Azul-Violeta está opuesto al amarillo! Son complementarios y combinan de maravilla.'},
-  {q:'¿Qué hace especial al SPLIT complementario?',type:'text',
-   opts:['Usa solo 1 color','Usa 2 vecinos del opuesto','Es el opuesto exacto','Usa 5 colores'],correct:1,
-   exp:'¡El split usa los 2 colores que flanquean al complementario, dando más variedad y suavidad!'}
-];
-
-// ═══════════════════════════════════════════════
-// COLOR MATH
-// ═══════════════════════════════════════════════
-function hsvToRgb(h,s,v){
-  s/=100;v/=100;
-  const f=n=>{const k=(n+h/60)%6;return v-v*s*Math.max(0,Math.min(k,4-k,1))};
-  return[Math.round(f(5)*255),Math.round(f(3)*255),Math.round(f(1)*255)];
-}
-function hsvToHex(h,s,v){
-  const[r,g,b]=hsvToRgb(h,s,v);
-  return'#'+[r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('').toUpperCase();
-}
-function hsvToHsl(h,s,v){
-  s/=100;v/=100;const l=v*(1-s/2);
-  const sl=(l===0||l===1)?0:(v-l)/Math.min(l,1-l);
-  return[Math.round(h),Math.round(sl*100),Math.round(l*100)];
-}
-function hexToRgbArr(hex){
-  return[parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16)];
-}
-function luminance(hex){
-  return hexToRgbArr(hex).map((c,i)=>{c/=255;return c<=.03928?c/12.92:Math.pow((c+.055)/1.055,2.4)})
-    .reduce((a,c,i)=>a+c*[.2126,.7152,.0722][i],0);
-}
-function contrastRatio(a,b){const la=luminance(a),lb=luminance(b);return(Math.max(la,lb)+.05)/(Math.min(la,lb)+.05)}
-function fgColor(hex){return luminance(hex)>.25?'#1A1A1A':'#FFFFFF'}
-function getColorName(h){for(let i=COLOR_NAMES.length-1;i>=0;i--)if(h>=COLOR_NAMES[i][0])return COLOR_NAMES[i][1];return'Rojo'}
-function getPsych(h){return PSYCH.find(p=>h<p.max)||PSYCH[PSYCH.length-1]}
-function hueToFreq(h){const p=[261.63,293.66,329.63,392,440,523.25,587.33,659.25,784,880];return p[Math.floor(h/36)%p.length]}
-
-// ═══════════════════════════════════════════════
-// AUDIO
-// ═══════════════════════════════════════════════
-let aCtx=null,soundOn=true;
-function initAudio(){if(!aCtx)aCtx=new(window.AudioContext||window.webkitAudioContext)()}
-function playTone(freq,dur=.13){
-  if(!soundOn)return;
-  try{
-    initAudio();
-    const o=aCtx.createOscillator(),g=aCtx.createGain();
-    o.connect(g);g.connect(aCtx.destination);
-    o.type='sine';o.frequency.value=freq;
-    g.gain.setValueAtTime(.07,aCtx.currentTime);
-    g.gain.exponentialRampToValueAtTime(.001,aCtx.currentTime+dur);
-    o.start(aCtx.currentTime);o.stop(aCtx.currentTime+dur);
-  }catch(e){}
-}
-
-// ═══════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════
-const S={hue:0,sat:100,val:100,harmony:'complementario',activeTab:'palette',
-  dark:false,history:[],quizQ:0,quizScore:0,quizAnswered:false,quizDone:false};
-
-function paletteColors(){
+function buildTips(){
   const H=HARMONIES[S.harmony];
-  return[S.hue,...H.offsets.map(o=>(S.hue+o+720)%360)].map(h=>({h,s:S.sat,v:S.val,hex:hsvToHex(h,S.sat,S.val)}));
-}
-
-function addHistory(h,s,v){
-  const hex=hsvToHex(h,s,v);
-  S.history=S.history.filter(x=>x.hex!==hex);
-  S.history.unshift({h,s,v,hex});
-  if(S.history.length>12)S.history.pop();
-  renderHistory();
-}
-
-// ═══════════════════════════════════════════════
-// CANVAS
-// ═══════════════════════════════════════════════
-const canvas=document.getElementById('wheelCanvas');
-const ctx=canvas.getContext('2d');
-let SIZE,CX,CY,OUTER,RING_W,INNER,MARK_R;
-
-function setSize(){
-  SIZE=Math.min(window.innerWidth-46,360);
-  canvas.width=canvas.height=SIZE;
-  CX=CY=SIZE/2;OUTER=SIZE/2-6;RING_W=OUTER*.25;INNER=OUTER-RING_W;MARK_R=INNER+RING_W/2;
-}
-
-function drawWheel(ghostH=null){
-  ctx.clearRect(0,0,SIZE,SIZE);
-  drawRing();drawPicker();
-  if(ghostH!==null)drawGhost(ghostH);
-  drawMarkers();
-}
-
-function drawRing(){
-  for(let h=0;h<360;h++){
-    const a1=(h-90)*Math.PI/180,a2=(h+1.2-90)*Math.PI/180;
-    ctx.beginPath();ctx.arc(CX,CY,OUTER,a1,a2);ctx.arc(CX,CY,INNER,a2,a1,true);ctx.closePath();
-    ctx.fillStyle=`hsl(${h},100%,50%)`;ctx.fill();
-  }
-  ctx.beginPath();ctx.arc(CX,CY,INNER,0,Math.PI*2);ctx.strokeStyle='rgba(0,0,0,0.08)';ctx.lineWidth=1;ctx.stroke();
-}
-
-function drawPicker(){
-  ctx.save();
-  ctx.beginPath();ctx.arc(CX,CY,INNER-1,0,Math.PI*2);ctx.clip();
-  const baseHex=hsvToHex(S.hue,100,100);
-  const gH=ctx.createLinearGradient(CX-INNER,CY,CX+INNER,CY);
-  gH.addColorStop(0,'#FFFFFF');gH.addColorStop(1,baseHex);
-  ctx.fillStyle=gH;ctx.fillRect(CX-INNER,CY-INNER,INNER*2,INNER*2);
-  const gV=ctx.createLinearGradient(CX,CY-INNER,CX,CY+INNER);
-  gV.addColorStop(0,'rgba(0,0,0,0)');gV.addColorStop(1,'rgba(0,0,0,1)');
-  ctx.fillStyle=gV;ctx.fillRect(CX-INNER,CY-INNER,INNER*2,INNER*2);
-  ctx.restore();
-  // Picker dot
-  const PR=INNER-7;
-  const dx=CX+(S.sat/100-.5)*2*PR,dy=CY-(S.val/100-.5)*2*PR;
-  ctx.beginPath();ctx.arc(dx,dy,8,0,Math.PI*2);
-  ctx.fillStyle=hsvToHex(S.hue,S.sat,S.val);ctx.fill();
-  ctx.strokeStyle='white';ctx.lineWidth=3;ctx.stroke();
-  ctx.beginPath();ctx.arc(dx,dy,8,0,Math.PI*2);ctx.strokeStyle='rgba(0,0,0,0.25)';ctx.lineWidth=1;ctx.stroke();
-}
-
-function drawGhost(gh){
-  const a=(gh-90)*Math.PI/180,gx=CX+MARK_R*Math.cos(a),gy=CY+MARK_R*Math.sin(a);
-  ctx.beginPath();ctx.arc(gx,gy,11,0,Math.PI*2);
-  ctx.fillStyle=`hsla(${gh},100%,50%,0.4)`;ctx.fill();
-  ctx.strokeStyle='rgba(255,255,255,.6)';ctx.lineWidth=2;ctx.stroke();
-}
-
-function drawMarkers(){
-  paletteColors().forEach((c,i)=>{
-    const a=(c.h-90)*Math.PI/180,mx=CX+MARK_R*Math.cos(a),my=CY+MARK_R*Math.sin(a),r=i===0?17:14;
-    ctx.shadowColor='rgba(0,0,0,0.35)';ctx.shadowBlur=8;
-    ctx.beginPath();ctx.arc(mx,my,r,0,Math.PI*2);ctx.fillStyle=c.hex;ctx.fill();ctx.shadowBlur=0;
-    ctx.beginPath();ctx.arc(mx,my,r,0,Math.PI*2);ctx.strokeStyle='white';ctx.lineWidth=i===0?3.5:2.5;ctx.stroke();
-    ctx.fillStyle=fgColor(c.hex);ctx.font=`900 ${i===0?11:9}px Nunito,sans-serif`;
-    ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),mx,my+.5);
+  const data=TIPS_DATA[S.harmony];
+  let html=`<div class="tips-harmony-btns">`;
+  Object.entries(HARMONIES).forEach(([key,h])=>{
+    html+=`<button class="th-btn${key===S.harmony?' active':''}" data-th="${key}" style="--th-c:${h.pc}">${h.emoji} ${h.name}</button>`;
   });
-}
-
-// ═══════════════════════════════════════════════
-// INTERACTION
-// ═══════════════════════════════════════════════
-let dragZone=null,lastHz=-1;
-
-function evtXY(e){
-  const rect=canvas.getBoundingClientRect(),sc=SIZE/rect.width;
-  const cx=((e.touches?e.touches[0].clientX:e.clientX)-rect.left)*sc;
-  const cy=((e.touches?e.touches[0].clientY:e.clientY)-rect.top)*sc;
-  return{x:cx,y:cy,dx:cx-CX,dy:cy-CY,dist:Math.hypot(cx-CX,cy-CY)};
-}
-function hueFromEvt(e){const{dx,dy}=evtXY(e);let a=Math.atan2(dy,dx)*180/Math.PI+90;if(a<0)a+=360;return Math.round(a)%360}
-function svFromEvt(e){
-  const{dx,dy}=evtXY(e),PR=INNER-7,d=Math.hypot(dx,dy);
-  let nx=dx,ny=dy;if(d>PR){nx=dx/d*PR;ny=dy/d*PR;}
-  return[Math.round(Math.max(0,Math.min(100,(nx/(2*PR)+.5)*100))),
-         Math.round(Math.max(0,Math.min(100,(.5-ny/(2*PR))*100)))];
-}
-
-canvas.addEventListener('mousedown',e=>{
-  const{dist}=evtXY(e);
-  if(dist>=INNER&&dist<=OUTER+10){dragZone='ring';S.hue=hueFromEvt(e);initAudio();playTone(hueToFreq(S.hue));addHistory(S.hue,S.sat,S.val);update();drawWheel();}
-  else if(dist<INNER-1){dragZone='inner';const[s,v]=svFromEvt(e);S.sat=s;S.val=v;initAudio();playTone(hueToFreq(S.hue)*.9,.08);update();drawWheel();}
-});
-canvas.addEventListener('mousemove',e=>{
-  const{dist}=evtXY(e);const tip=document.getElementById('hoverTip');const rect=canvas.getBoundingClientRect();
-  if(dragZone==='ring'){S.hue=hueFromEvt(e);if(Math.abs(S.hue-lastHz)>5){playTone(hueToFreq(S.hue),.07);lastHz=S.hue;}update();drawWheel();}
-  else if(dragZone==='inner'){const[s,v]=svFromEvt(e);S.sat=s;S.val=v;update();drawWheel();}
-  else{
-    if(dist>=INNER&&dist<=OUTER+10){
-      const gh=hueFromEvt(e),cx=e.clientX-rect.left,cy=e.clientY-rect.top;
-      tip.style.display='block';tip.style.left=cx+'px';tip.style.top=cy+'px';tip.style.background=`hsl(${gh},100%,50%)`;drawWheel(gh);
-    }else{tip.style.display='none';drawWheel();}
-  }
-});
-canvas.addEventListener('mouseup',()=>{if(dragZone){addHistory(S.hue,S.sat,S.val);}dragZone=null;});
-canvas.addEventListener('mouseleave',()=>{dragZone=null;document.getElementById('hoverTip').style.display='none';drawWheel();});
-canvas.addEventListener('touchstart',e=>{
-  e.preventDefault();const{dist}=evtXY(e);
-  if(dist>=INNER&&dist<=OUTER+10){dragZone='ring';S.hue=hueFromEvt(e);initAudio();playTone(hueToFreq(S.hue));addHistory(S.hue,S.sat,S.val);update();drawWheel();}
-  else if(dist<INNER-1){dragZone='inner';const[s,v]=svFromEvt(e);S.sat=s;S.val=v;initAudio();playTone(hueToFreq(S.hue)*.9,.08);update();drawWheel();}
-},{passive:false});
-canvas.addEventListener('touchmove',e=>{
-  e.preventDefault();if(!dragZone)return;
-  if(dragZone==='ring'){S.hue=hueFromEvt(e);if(Math.abs(S.hue-lastHz)>8){playTone(hueToFreq(S.hue),.06);lastHz=S.hue;}}
-  else{const[s,v]=svFromEvt(e);S.sat=s;S.val=v;}
-  update();drawWheel();
-},{passive:false});
-canvas.addEventListener('touchend',()=>{if(dragZone)addHistory(S.hue,S.sat,S.val);dragZone=null;});
-
-// ═══════════════════════════════════════════════
-// UI UPDATE
-// ═══════════════════════════════════════════════
-function update(){
-  const hex=hsvToHex(S.hue,S.sat,S.val);
-  const fg=fgColor(hex);const psych=getPsych(S.hue);
-  document.getElementById('bigSwatch').style.background=hex;
-  const nm=document.getElementById('colorName');nm.textContent=getColorName(S.hue);
-  nm.style.color=hsvToHex(S.hue,Math.min(S.sat,90),Math.min(S.val,55));
-  const badge=document.getElementById('tempBadge');
-  badge.textContent=`${psych.emoji} ${psych.temp.charAt(0).toUpperCase()+psych.temp.slice(1)}`;
-  badge.style.background=psych.tbg;badge.style.color=psych.tc;
-  const htag=document.getElementById('hexTag');htag.textContent=hex;htag.style.background=hex;htag.style.color=fg;
-  document.documentElement.style.setProperty('--acc',hex);
-  renderTab(S.activeTab);
-}
-
-// ═══════════════════════════════════════════════
-// TABS
-// ═══════════════════════════════════════════════
-function renderTab(tab){
-  const el=document.getElementById('tabContent');
-  if(tab==='palette')el.innerHTML=buildPalette();
-  else if(tab==='values')el.innerHTML=buildValues();
-  else if(tab==='psych')el.innerHTML=buildPsych();
-  else if(tab==='variants')el.innerHTML=buildVariants();
-  bindTabEv(tab);
-}
-
-// ── PALETTE ──
-function buildPalette(){
-  const H=HARMONIES[S.harmony],colors=paletteColors();
-  let html='<div class="swatches">';
-  colors.forEach((c,i)=>{
-    const fg=fgColor(c.hex);
-    html+=`<div class="sw${i===0?' base':''}" data-h="${c.h}" data-s="${c.s}" data-v="${c.v}">
-      <div class="sw-dot" style="background:${c.hex}"></div>
-      <div class="sw-text">
-        <div class="sw-role">${H.roles[i]||'Color '+(i+1)}</div>
-        <div class="sw-name">${getColorName(c.h)}</div>
-        <div class="sw-hex">${c.hex}</div>
+  html+=`</div>`;
+  // Sections accordion
+  data.sections.forEach((sec,si)=>{
+    html+=`<div class="tip-section">
+      <div class="tip-header" data-sec="${si}">
+        <div class="tip-icon">${sec.icon}</div>
+        <div class="tip-htitle"><strong>${sec.title}</strong><span>${sec.sub}</span></div>
+        <div class="tip-arrow${si===0?' open':''}" id="tarr-${si}">▶</div>
       </div>
-      <button class="sw-copy" data-copy="${c.hex}">📋 Copiar</button>
-    </div>`;
-  });
-  html+=`</div><div class="harm-desc">
-    <div class="harm-desc-title">${H.emoji} ${H.name}</div>
-    <div class="harm-desc-text">${H.desc}</div>
-  </div>
-  <div class="export-row">
-    <button class="exp-btn" id="expPNG">🖼️ PNG</button>
-    <button class="exp-btn" id="expCSS">⚙️ CSS</button>
-    <button class="exp-btn" id="expJSON">📦 JSON</button>
-  </div>`;
-  return html;
-}
-
-// ── VALUES ──
-function buildValues(){
-  const h=S.hue,s=S.sat,v=S.val,hex=hsvToHex(h,s,v);
-  const[r,g,b]=hsvToRgb(h,s,v);
-  const[hh,sl,l]=hsvToHsl(h,s,v);
-  let html=`<div class="vals-grid">
-    <div class="val-box" data-copy="${hex}"><div class="val-type">HEX</div><div class="val-val">${hex}</div></div>
-    <div class="val-box" data-copy="rgb(${r}, ${g}, ${b})"><div class="val-type">RGB</div><div class="val-val">${r}, ${g}, ${b}</div></div>
-    <div class="val-box" data-copy="hsl(${hh}, ${sl}%, ${l}%)"><div class="val-type">HSL</div><div class="val-val">${hh}°, ${sl}%, ${l}%</div></div>
-    <div class="val-box" data-copy="hsv(${h}, ${s}%, ${v}%)"><div class="val-type">HSV / HSB</div><div class="val-val">${h}°, ${s}%, ${v}%</div></div>
-  </div>`;
-  const colors=paletteColors();
-  html+=`<div class="wcag-wrap"><div class="section-label">♿ Contraste WCAG</div><div class="wcag-rows">`;
-  const pairs=[[colors[0].hex,'#FFFFFF','vs Blanco'],[colors[0].hex,'#000000','vs Negro']];
-  for(let i=0;i<colors.length-1;i++)for(let j=i+1;j<colors.length;j++)
-    pairs.push([colors[i].hex,colors[j].hex,`${getColorName(colors[i].h)} / ${getColorName(colors[j].h)}`]);
-  pairs.forEach(([a,b,label])=>{
-    const ratio=contrastRatio(a,b),pass=ratio>=4.5;
-    html+=`<div class="wcag-row">
-      <div class="wcag-dots">
-        <div class="wcag-dot" style="background:${a};border:1px solid var(--border)"></div>
-        <div class="wcag-dot" style="background:${b};border:1px solid var(--border)"></div>
-      </div>
-      <div class="wcag-info">${label}</div>
-      <div class="wcag-right">
-        <div class="wcag-ratio">${ratio.toFixed(1)}:1</div>
-        <span class="${pass?'bpass':'bfail'}">${pass?'✓ AA':'✗ AA'}</span>
-      </div>
-    </div>`;
-  });
-  html+=`</div></div>`;
-  return html;
-}
-
-// ── PSYCH ──
-function buildPsych(){
-  const psych=getPsych(S.hue),colors=paletteColors();
-  return`<div class="temp-big" style="background:${psych.tbg};color:${psych.tc}">${psych.emoji} Color <strong>${psych.temp}</strong> &nbsp; ${psych.icon}</div>
-  <div class="psych-block"><div class="psych-title">¿Qué transmite este color?</div><div class="psych-text">${psych.meaning}</div></div>
-  <div class="psych-block"><div class="psych-title">🏢 Marcas que lo usan</div><div class="psych-text">${psych.brands}</div></div>
-  <div class="section-label" style="margin-bottom:9px">🖼️ Tu paleta en acción</div>
-  <div class="mockup-row">${svgApp(colors)}${svgPoster(colors)}</div>`;
-}
-
-function svgApp(c){
-  const[c0,c1,c2]=[c[0].hex,c[1]?.hex||c[0].hex,c[2]?.hex||c[1]?.hex||c[0].hex];
-  const bg=S.dark?'#1E1E34':'#F0F0F5',card=S.dark?'#2A2A50':'#FFF',txt=S.dark?'#EEE':'#222';
-  return`<div class="mockup-box"><svg viewBox="0 0 170 125" xmlns="http://www.w3.org/2000/svg">
-    <rect width="170" height="125" fill="${bg}" rx="8"/>
-    <rect width="170" height="30" fill="${c0}"/>
-    <rect x="8" y="7" width="44" height="16" rx="4" fill="rgba(255,255,255,.25)"/>
-    <circle cx="152" cy="15" r="7" fill="rgba(255,255,255,.2)"/>
-    <circle cx="136" cy="15" r="7" fill="rgba(255,255,255,.2)"/>
-    <rect x="8" y="38" width="46" height="34" rx="6" fill="${card}"/>
-    <rect x="10" y="40" width="42" height="8" rx="2" fill="${c1}" opacity=".9"/>
-    <rect x="10" y="52" width="28" height="3" rx="2" fill="${txt}" opacity=".3"/>
-    <rect x="10" y="59" width="18" height="3" rx="2" fill="${txt}" opacity=".2"/>
-    <rect x="62" y="38" width="46" height="34" rx="6" fill="${card}"/>
-    <rect x="64" y="40" width="42" height="8" rx="2" fill="${c2}" opacity=".9"/>
-    <rect x="64" y="52" width="28" height="3" rx="2" fill="${txt}" opacity=".3"/>
-    <rect x="64" y="59" width="18" height="3" rx="2" fill="${txt}" opacity=".2"/>
-    <rect x="116" y="38" width="46" height="34" rx="6" fill="${card}"/>
-    <rect x="118" y="40" width="42" height="8" rx="2" fill="${c0}" opacity=".45"/>
-    <rect x="118" y="52" width="28" height="3" rx="2" fill="${txt}" opacity=".3"/>
-    <rect x="116" y="80" width="46" height="18" rx="6" fill="${c0}"/>
-    <rect x="8" y="80" width="100" height="36" rx="6" fill="${card}"/>
-    <rect x="14" y="88" width="70" height="7" rx="2" fill="${txt}" opacity=".4"/>
-    <rect x="14" y="99" width="44" height="5" rx="2" fill="${txt}" opacity=".2"/>
-    <text x="85" y="122" font-size="5" fill="${txt}" opacity=".3" text-anchor="middle" font-family="sans-serif">App UI</text>
-  </svg></div>`;
-}
-
-function svgPoster(c){
-  const[c0,c1,c2]=[c[0].hex,c[1]?.hex||c[0].hex,c[2]?.hex||c[1]?.hex||c[0].hex];
-  const fg=fgColor(c0);
-  return`<div class="mockup-box"><svg viewBox="0 0 170 125" xmlns="http://www.w3.org/2000/svg">
-    <rect width="170" height="125" fill="${c0}" rx="8"/>
-    <circle cx="145" cy="20" r="50" fill="${c1}" opacity=".35"/>
-    <circle cx="25" cy="105" r="35" fill="${c2}" opacity=".3"/>
-    <rect x="14" y="16" width="80" height="10" rx="3" fill="rgba(255,255,255,.25)"/>
-    <rect x="14" y="32" width="64" height="18" rx="4" fill="${fg}" opacity=".9"/>
-    <rect x="14" y="56" width="55" height="5" rx="3" fill="${fg}" opacity=".5"/>
-    <rect x="14" y="66" width="44" height="5" rx="3" fill="${fg}" opacity=".4"/>
-    <rect x="14" y="76" width="50" height="5" rx="3" fill="${fg}" opacity=".3"/>
-    <rect x="14" y="92" width="48" height="18" rx="8" fill="${c1}"/>
-    <rect x="18" y="97" width="36" height="8" rx="2" fill="rgba(255,255,255,.5)"/>
-    <text x="85" y="122" font-size="5" fill="${fg}" opacity=".35" text-anchor="middle" font-family="sans-serif">Póster</text>
-  </svg></div>`;
-}
-
-// ── VARIANTS ──
-function buildVariants(){
-  const h=S.hue,s=S.sat,v=S.val;
-  const tints=[0,1,2,3,4].map(i=>hsvToHex(h,Math.round(s*(1-i*.2)),Math.min(100,Math.round(v+(100-v)*i*.25))));
-  const shades=[0,1,2,3,4].map(i=>hsvToHex(h,s,Math.round(v*(1-i*.22))));
-  const tones=[0,1,2,3,4].map(i=>hsvToHex(h,Math.round(s*(1-i*.22)),Math.min(100,Math.round(v*(1-i*.05)+i*3))));
-  let html='';
-  [['☀️ Tints (+ blanco)',tints],['🌑 Shades (+ negro)',shades],['🌫️ Tonos (+ gris)',tones]].forEach(([title,items])=>{
-    html+=`<div class="var-section"><div class="section-label">${title}</div><div class="var-strip">`;
-    items.forEach((hex,i)=>{
-      const pct=['100','80','60','40','20'][i];
-      html+=`<div class="var-sw" style="background:${hex}" data-copy="${hex}" title="${hex}">
-        <span class="var-pct" style="color:${fgColor(hex)}">${pct}%</span>
+      <div class="tip-body${si===0?' open':''}" id="tbody-${si}">`;
+    sec.rows.forEach(row=>{
+      html+=`<div class="tip-row">
+        <div class="tip-row-icon">${row.icon}</div>
+        <div class="tip-row-text">
+          <div class="tip-row-title">${row.title}</div>
+          <div class="tip-row-desc">${row.desc}</div>
+          <div class="tip-example">💡 ${row.example}</div>
+        </div>
       </div>`;
     });
     html+=`</div></div>`;
   });
+  // Global tips
+  html+=`<div class="section-label" style="margin:18px 0 10px">🌟 Consejos universales del color</div><div class="tips-global">`;
+  TIPS_GLOBAL.forEach(t=>{
+    html+=`<div class="tip-global-row">
+      <div class="tip-global-icon">${t.icon}</div>
+      <div class="tip-global-text"><strong>${t.title}</strong><p>${t.text}</p></div>
+    </div>`;
+  });
+  html+=`</div>`;
   return html;
+}
+
+function bindTipsEv(){
+  // Harmony selector inside tips
+  document.querySelectorAll('.th-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      S.harmony=btn.dataset.th;
+      document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('active',b.dataset.h===S.harmony));
+      drawWheel();update();
+    });
+  });
+  // Accordion
+  document.querySelectorAll('.tip-header').forEach(hdr=>{
+    hdr.addEventListener('click',()=>{
+      const si=hdr.dataset.sec;
+      const body=document.getElementById('tbody-'+si);
+      const arr=document.getElementById('tarr-'+si);
+      const isOpen=body.classList.contains('open');
+      body.classList.toggle('open',!isOpen);
+      arr.classList.toggle('open',!isOpen);
+    });
+  });
 }
 
 function bindTabEv(tab){
@@ -1710,9 +1015,13 @@ function bindTabEv(tab){
 // ═══════════════════════════════════════════════
 function renderHistory(){
   const bar=document.getElementById('histBar');bar.innerHTML='';
+  if(S.history.length===0){
+    bar.innerHTML='<div class="hist-empty">Toca la rueda para guardar colores aquí...</div>';
+    return;
+  }
   S.history.forEach((c,i)=>{
     const d=document.createElement('div');
-    d.className='hist-dot'+(i===0?' current':'');d.style.background=c.hex;d.title=c.hex;
+    d.className='hist-dot'+(i===0?' current':'');d.style.background=c.hex;d.title=`${c.hex} – clic para seleccionar`;
     d.addEventListener('click',()=>{S.hue=c.h;S.sat=c.s;S.val=c.v;playTone(hueToFreq(c.h));update();drawWheel();});
     bar.appendChild(d);
   });
@@ -1841,8 +1150,29 @@ function copyShareURL(){copyText(getShareURL())}
 // ═══════════════════════════════════════════════
 function copyCurrentHex(){copyText(hsvToHex(S.hue,S.sat,S.val))}
 function copyText(text){
-  navigator.clipboard.writeText(text).catch(()=>{});
-  showToast(`✅ ${text.length>35?text.slice(0,33)+'…':text}`);
+  // Método 1: Clipboard API moderna
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(()=>{
+      showToast(`✅ ${text.length>35?text.slice(0,33)+'…':text}`);
+    }).catch(()=>copyFallback(text));
+  } else {
+    copyFallback(text);
+  }
+}
+function copyFallback(text){
+  // Método 2: textarea + execCommand (funciona en todos los contextos)
+  const ta=document.createElement('textarea');
+  ta.value=text;
+  ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;pointer-events:none';
+  document.body.appendChild(ta);
+  ta.focus();ta.select();
+  try{
+    document.execCommand('copy');
+    showToast(`✅ ${text.length>35?text.slice(0,33)+'…':text}`);
+  }catch(e){
+    showToast('⚠️ No se pudo copiar, selecciónalo manualmente');
+  }
+  document.body.removeChild(ta);
 }
 function showToast(msg){
   const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
@@ -1889,27 +1219,29 @@ document.getElementById('soundBtn').addEventListener('click',()=>{
 });
 document.getElementById('shareBtn').addEventListener('click',openShare);
 
-// Load from hash
-const hash=window.location.hash.slice(1);
-if(hash){
-  const p=hash.split(',');
-  if(p.length>=3){
-    S.hue=Math.max(0,Math.min(359,parseInt(p[0])||0));
-    S.sat=Math.max(0,Math.min(100,parseInt(p[1])||100));
-    S.val=Math.max(0,Math.min(100,parseInt(p[2])||100));
-    if(p[3]&&HARMONIES[p[3]]){
-      S.harmony=p[3];
-      document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('active',b.dataset.h===S.harmony));
+document.addEventListener('DOMContentLoaded',function(){
+  // Load from URL hash
+  const hash=window.location.hash.slice(1);
+  if(hash){
+    const p=hash.split(',');
+    if(p.length>=3){
+      S.hue=Math.max(0,Math.min(359,parseInt(p[0])||0));
+      S.sat=Math.max(0,Math.min(100,parseInt(p[1])||100));
+      S.val=Math.max(0,Math.min(100,parseInt(p[2])||100));
+      if(p[3]&&HARMONIES[p[3]]){
+        S.harmony=p[3];
+        document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('active',b.dataset.h===S.harmony));
+      }
     }
   }
-}
+  setSize();
+  addHistory(S.hue,S.sat,S.val);
+  update();
+  drawWheel();
+});
 
-window.addEventListener('resize',()=>{setSize();drawWheel()});
+window.addEventListener('resize',()=>{setSize();drawWheel();update();});
 
-setSize();
-addHistory(S.hue,S.sat,S.val);
-update();
-drawWheel();
 </script>
 </body>
 </html>
